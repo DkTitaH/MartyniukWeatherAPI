@@ -18,7 +18,7 @@ class CountriesView: UIView {
     struct Weathers: Codable {
         var name: String
         var id: Int?
-
+        let main: [String : Double]?
     }
     
     var countries: [Countries]? {
@@ -39,36 +39,26 @@ class CountriesView: UIView {
 
     @IBOutlet var table: UITableView?
     
-    func getWeather() {
-        let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q=Kiev&APPID=60cf95f166563b524e17c7573b54d7e3"
-        guard let url = URL(string: baseUrl) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data else { return }
-            
-            let result = try? JSONSerialization.jsonObject(with: data) as? [String : AnyObject]
-            result?.do {
-                let main = $0["main"] as? [String : Double]
-                main.do {
-                    let a = Float($0["temp"]! - 273.15)
-                    print(a)
-                }
-            }
+    func getCountries() {
+        let url = URL(string: "https://restcountries.eu/rest/v2/all")
+        if let url = url {
+            URLSession.shared.dataTask(with: url) { (data, respose, error) in
+                let countries = data.flatMap { try? JSONDecoder().decode([Countries].self, from: $0) }
+                countries.do { self.countries = $0 }
+            }.resume()
+        }
+    }
+    
+    func getWeather(city: String) {
+        let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
+        let apiKey = "&APPID=60cf95f166563b524e17c7573b54d7e3"
+        guard let url = URL(string: baseUrl + city + apiKey) else { return }
+        URLSession.shared.dataTask(with: url) { (data, respose, error) in
+            let weather = data.flatMap { try? JSONDecoder().decode(Weathers.self, from: $0) }
+            guard let tempKelvin = weather?.main?["temp"] else { return }
+            let tempCelciy = Int(tempKelvin - 273.15)
+            print(tempCelciy)
         }.resume()
-
-//        guard let url = URL(string: "https://restcountries.eu/rest/v2/all") else { return }
-//            let decoder = JSONDecoder()
-//            let d = String.init(bytes: data!, encoding: .utf8)
-            
-//            let res = data.flatMap {
-//                try? decoder.decode(Weathers.self, from: $0)
-//            }
-            
-//            print(res)
-//            let result = data.flatMap { try? decoder.decode([Weathers].self, from: $0) }
-//            self.weathers = res ?? nil
-      
-//        task.resume()
-//        print(self.weathers)
+    
     }
 }

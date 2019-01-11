@@ -20,27 +20,27 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         let rootView = self.rootView
         let table = rootView?.table
         
-        rootView?.getWeather()
+        self.rootView?.getCountries()
         table?.register(UITableViewCell.self, forCellReuseIdentifier: self.id)
         table?.delegate = self
         table?.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-//            self.rootView?.weathers?.count ?? 0
+        return self.rootView?.countries?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = self.rootView?.table?.dequeueReusableCell(withIdentifier: self.id)
             ?? UITableViewCell()
-        cell.textLabel?.text = "\(self.rootView?.weathers?.name)"
-//            self.rootView?.weathers?[indexPath.row]
+        cell.textLabel?.text = self.rootView?.countries?[indexPath.row].name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(self.rootView?.weathers?[indexPath.row] ?? "")
+        
+        guard let city = self.rootView?.countries?[indexPath.row].capital else { return }
+        self.rootView?.getWeather(city: city)
     }
 }
