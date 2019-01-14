@@ -39,8 +39,29 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
+        let apiKey = "&APPID=60cf95f166563b524e17c7573b54d7e3"
         
         guard let city = self.rootView?.countries?[indexPath.row].capital else { return }
-        self.rootView?.getWeather(city: city)
+        guard let url = URL(string: baseUrl + city + apiKey) else { return }
+        
+        let networkManager = NetworkManager<Weathers>()
+        let weatherController = WeatherViewController()
+        
+        networkManager.loadData(url: url)
+        _ = networkManager.observer { state in
+            switch state {
+            case .didLoad:
+                guard let tempKelvin = networkManager.model?.main?["temp"] else { return }
+                self.rootView?.temperature = Int(tempKelvin - 273.15)
+                
+                guard let temperature = self.rootView?.temperature else { return }
+                weatherController.temperature = temperature
+            default:
+                return
+            }
+            
+            self.navigationController?.pushViewController(weatherController, animated: true)
+        }
     }
 }

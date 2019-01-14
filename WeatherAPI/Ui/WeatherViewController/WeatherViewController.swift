@@ -11,8 +11,12 @@ import UIKit
 class WeatherViewController: UIViewController, RootViewRepresentable {
     
     typealias RootView = WeatherView
+    
+    var temperature = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.rootView?.label?.text = String(self.temperature)
     }
 }

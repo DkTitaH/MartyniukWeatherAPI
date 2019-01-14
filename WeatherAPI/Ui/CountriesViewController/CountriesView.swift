@@ -10,17 +10,6 @@ import UIKit
 
 class CountriesView: UIView {
     
-    struct Countries: Codable {
-        var name: String
-        var capital: String
-    }
-    
-    struct Weathers: Codable {
-        var name: String
-        var id: Int?
-        let main: [String : Double]?
-    }
-    
     var countries: [Countries]? {
         didSet {
             DispatchQueue.main.async {
@@ -29,36 +18,24 @@ class CountriesView: UIView {
         }
     }
     
-    var weathers: Weathers? {
-        didSet {
-            DispatchQueue.main.async {
-                self.table?.reloadData()
-            }
-        }
-    }
+    var temperature = 0
 
     @IBOutlet var table: UITableView?
     
     func getCountries() {
-        let url = URL(string: "https://restcountries.eu/rest/v2/all")
-        if let url = url {
-            URLSession.shared.dataTask(with: url) { (data, respose, error) in
-                let countries = data.flatMap { try? JSONDecoder().decode([Countries].self, from: $0) }
-                countries.do { self.countries = $0 }
-            }.resume()
+        let baseUrl = URL(string: "https://restcountries.eu/rest/v2/all")
+        guard let url = baseUrl else { return }
+        let networkManager = NetworkManager<[Countries]>()
+        networkManager.loadData(url: url)
+        _ = networkManager.observer { state in
+            switch state {
+            case .didLoad:
+                self.countries = networkManager.model
+            default:
+                return
+            }
         }
     }
-    
-    func getWeather(city: String) {
-        let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
-        let apiKey = "&APPID=60cf95f166563b524e17c7573b54d7e3"
-        guard let url = URL(string: baseUrl + city + apiKey) else { return }
-        URLSession.shared.dataTask(with: url) { (data, respose, error) in
-            let weather = data.flatMap { try? JSONDecoder().decode(Weathers.self, from: $0) }
-            guard let tempKelvin = weather?.main?["temp"] else { return }
-            let tempCelciy = Int(tempKelvin - 273.15)
-            print(tempCelciy)
-        }.resume()
-    
-    }
 }
+
+

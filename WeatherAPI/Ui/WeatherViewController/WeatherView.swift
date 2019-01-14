@@ -10,4 +10,5 @@ import UIKit
 
 class WeatherView: UIView {
 
+    @IBOutlet var label: UILabel?
 }
