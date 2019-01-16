@@ -12,8 +12,6 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     typealias RootView = CountriesView
 
-    private let id = "cell"
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,47 +19,45 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         let table = rootView?.table
         
         self.rootView?.getCountries()
-        table?.register(UITableViewCell.self, forCellReuseIdentifier: self.id)
+        table?.register(CountriesViewCell.self)
         table?.delegate = self
         table?.dataSource = self
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 47
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 47
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.rootView?.countries?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.rootView?.table?.dequeueReusableCell(withIdentifier: self.id)
-            ?? UITableViewCell()
-        cell.textLabel?.text = self.rootView?.countries?[indexPath.row].name
+        let cellName = toString(CountriesViewCell.self)
+        let cell = cast(self.rootView?.table?.dequeueReusableCell(withIdentifier: cellName))
+            ?? CountriesViewCell()
+        
+        let country = self.rootView?.countries?[indexPath.row]
+        country.do { cell.fillCell(country: $0) }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
-        let apiKey = "&APPID=60cf95f166563b524e17c7573b54d7e3"
-        
-        guard let city = self.rootView?.countries?[indexPath.row].capital else { return }
-        guard let url = URL(string: baseUrl + city + apiKey) else { return }
-        
-        let networkManager = NetworkManager<Weathers>()
-        let weatherController = WeatherViewController()
-        
-        networkManager.loadData(url: url)
-        _ = networkManager.observer { state in
-            switch state {
-            case .didLoad:
-                guard let tempKelvin = networkManager.model?.main?["temp"] else { return }
-                self.rootView?.temperature = Int(tempKelvin - 273.15)
-                
-                guard let temperature = self.rootView?.temperature else { return }
-                weatherController.temperature = temperature
-            default:
-                return
+        let weatherViewController = WeatherViewController()
+        weatherViewController.foo(indexPath: indexPath, countriesViewController: self) { weather in
+            weather.do {
+                if let a = self.rootView?.table?.cellForRow(at: indexPath) as? CountriesViewCell {
+                    a.date?.text = "DATE"
+                    a.temperature?.text = String($0.temperature)
+                }
+                self.navigationController?.pushViewController($0, animated: true)
             }
-            
-            self.navigationController?.pushViewController(weatherController, animated: true)
         }
     }
 }

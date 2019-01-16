@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Countries: Codable {
+struct Country: Codable {
     let name: String
     let capital: String
 }

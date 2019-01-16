@@ -8,8 +8,12 @@
 
 import Foundation
 
-struct Weathers: Codable {
-    let name: String
-    let id: Int?
+struct Weather: Codable {
     let main: [String : Double]?
+    let wind: [String : Double]?
+    let clouds: [String : Int]?
+}
+
+struct WeatherData {
+    let icon: String?
 }

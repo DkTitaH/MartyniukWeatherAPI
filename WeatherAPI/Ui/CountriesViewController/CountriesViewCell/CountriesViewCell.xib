@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CountriesViewCell" customModule="WeatherAPI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="46.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-Dd-Q9k">
+                        <rect key="frame" x="0.0" y="2" width="62" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" ambiguous="YES" text="Capital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-lO-NFc">
+                        <rect key="frame" x="266" y="2" width="54" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-Bg-RUI">
+                        <rect key="frame" x="0.0" y="24" width="36" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsb-gX-GwD">
+                        <rect key="frame" x="222" y="24" width="98" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ARN-GX-KNm"/>
+                    <constraint firstItem="tsb-gX-GwD" firstAttribute="top" secondItem="8iC-lO-NFc" secondAttribute="bottom" constant="2" id="B3C-aF-M5a"/>
+                    <constraint firstAttribute="trailing" secondItem="tsb-gX-GwD" secondAttribute="trailing" id="DJS-sW-H8m"/>
+                    <constraint firstAttribute="trailing" secondItem="8iC-lO-NFc" secondAttribute="trailing" id="J3b-W7-vRe"/>
+                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Td1-cy-yPh"/>
+                    <constraint firstAttribute="bottom" secondItem="7fq-Bg-RUI" secondAttribute="bottom" constant="2" id="XGj-T6-guX"/>
+                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="top" secondItem="vCS-Dd-Q9k" secondAttribute="bottom" constant="2" id="kQO-tX-FlO"/>
+                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="n8u-hd-mir"/>
+                    <constraint firstAttribute="bottom" secondItem="tsb-gX-GwD" secondAttribute="bottom" constant="2" id="tuX-OJ-xmX"/>
+                    <constraint firstItem="8iC-lO-NFc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="vUB-Gv-9qv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="capitalName" destination="8iC-lO-NFc" id="dHF-kP-Xdz"/>
+                <outlet property="countryName" destination="vCS-Dd-Q9k" id="rzf-8x-ABt"/>
+                <outlet property="date" destination="7fq-Bg-RUI" id="DIB-DF-sfF"/>
+                <outlet property="temperature" destination="tsb-gX-GwD" id="Nd6-wQ-ZsY"/>
+            </connections>
+            <point key="canvasLocation" x="276.80000000000001" y="165.06746626686657"/>
+        </tableViewCell>
+    </objects>
+</document>

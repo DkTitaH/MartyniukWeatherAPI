@@ -31,13 +31,8 @@ class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where Mo
         self.state = .didStartLoading
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             let result = data.flatMap { try? JSONDecoder().decode(ModelType.self, from: $0) }
-            if error == nil {
-                self.model = result
-                self.state = .didLoad
-            } else {
-                self.state = .didFailedWithError(error)
-            }
-
+            result.do { self.model = $0; self.state = .didLoad }
+            error.do { self.state = .didFailedWithError($0) }
         }.resume()
     }
 }
