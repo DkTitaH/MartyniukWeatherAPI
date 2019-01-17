@@ -10,8 +10,10 @@ import Foundation
 
 enum F {
     
-    typealias Completion = () -> ()
+    typealias VoidCompletion = () -> ()
     typealias Execute = () -> ()
+    
+    typealias Completion<Value> = (Value) -> ()
 }
 
 func when<Result>(_ condition: Bool, execute: () -> Result?) -> Result? {

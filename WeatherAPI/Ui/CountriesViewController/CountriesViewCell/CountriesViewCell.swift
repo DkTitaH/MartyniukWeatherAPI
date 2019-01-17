@@ -15,10 +15,10 @@ class CountriesViewCell: TableViewCell {
     @IBOutlet var date: UILabel?
     @IBOutlet var temperature: UILabel?
     
-    func fillCell(country: Country) {
-        self.countryName?.text = country.name
-        self.capitalName?.text = country.capital
-        self.date?.text = nil
-        self.temperature?.text = nil
+    func fillCell(model: WeatherModel) {
+        self.countryName?.text = model.country?.name
+        self.capitalName?.text = model.country?.capital
+        self.date?.text = "asadasd"
+        self.temperature?.text = model.weather?.main.temp.description
     }
 }

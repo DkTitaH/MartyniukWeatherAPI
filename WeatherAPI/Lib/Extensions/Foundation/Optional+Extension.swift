@@ -10,7 +10,7 @@ import Foundation
 
 extension Optional {
     
-    func `do`(action: (Wrapped) -> ()) {
+    func `do`(_ action: (Wrapped) -> ()) {
         self.map(action)
     }
     

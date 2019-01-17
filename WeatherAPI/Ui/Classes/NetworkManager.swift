@@ -11,7 +11,6 @@ import Foundation
 class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where ModelType: Decodable {
     
     public enum State {
-        case notWorking
         case didStartLoading
         case didLoad
         case didFailedWithError(_ error: Error?)
@@ -19,20 +18,15 @@ class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where Mo
     
     var model: ModelType?
     
-    private(set) var state: State = .notWorking {
-        didSet {
-            DispatchQueue.main.async {
-                self.notify(self.state)
-            }
-        }
-    }
-    
     func loadData(url: URL) {
-        self.state = .didStartLoading
+        self.notify(.didStartLoading)
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             let result = data.flatMap { try? JSONDecoder().decode(ModelType.self, from: $0) }
-            result.do { self.model = $0; self.state = .didLoad }
-            error.do { self.state = .didFailedWithError($0) }
+            result.do {
+                self.model = $0
+                self.notify(.didLoad)
+            }
+            error.do { self.notify(.didFailedWithError($0)) }
         }.resume()
     }
 }

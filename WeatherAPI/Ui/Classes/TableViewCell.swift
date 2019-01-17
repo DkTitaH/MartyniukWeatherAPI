@@ -14,7 +14,9 @@ class TableViewCell : UITableViewCell {
     }
 }
 
-class Cell : TableViewCell { }
+class Cell : TableViewCell {
+    
+}
     
 func toString(_ cls: AnyClass) -> String {
     return String(describing: cls)
