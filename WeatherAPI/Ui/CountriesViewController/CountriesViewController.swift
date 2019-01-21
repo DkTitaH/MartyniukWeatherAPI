@@ -12,17 +12,15 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     typealias RootView = CountriesView
     
-    private var countries: [Country]? {
+    private let countriesManager = CountriesManager()
+    
+    private var models: [DataModel]? {
         didSet {
             DispatchQueue.main.async {
                 self.rootView?.table?.reloadData()
             }
         }
     }
-    
-    private(set) var countriesManager = CountriesManager()
-    
-    private let model = WeatherModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +31,7 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         
         countriesManager.getCountries()
         countriesManager.completion = { countries in
-            self.countries = countries
+            self.models = countries.map { DataModel(country: $0) }
         }
         
         table?.register(CountriesViewCell.self)
@@ -42,7 +40,7 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.countries?.count ?? 0
+        return self.models?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,20 +48,25 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = cast(self.rootView?.table?.dequeueReusableCell(withIdentifier: cellName))
             ?? CountriesViewCell()
         
-        self.model.country = self.countries?[indexPath.row]
-        
-        cell.fillCell(model: self.model)
+        self.models.do { cell.fillCell(model: $0[indexPath.row]) }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let weatherViewController = WeatherViewController()
-        let cityName = self.countries?[indexPath.row].capital
         
-        cityName.do { weatherViewController.dataManager.getWeatherData(city: $0) }
+        let index = indexPath.row
+        let cityName = self.models?[index].country.capital
         
-        self.model.weather = weatherViewController.model.weather
+        cityName.do { weatherViewController.weatherManager.getWeatherData(city: $0) }
+        
+        weatherViewController.escapingHandler = { weather in
+            self.models?[index].weather = weather
+            DispatchQueue.main.async {
+                self.rootView?.table?.reloadData()
+            }
+        }
         
         self.navigationController?.pushViewController(weatherViewController, animated: true)
     }

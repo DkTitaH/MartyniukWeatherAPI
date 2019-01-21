@@ -19,25 +19,37 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-Dd-Q9k">
-                        <rect key="frame" x="0.0" y="2" width="62" height="20.5"/>
+                        <rect key="frame" x="0.0" y="2" width="160" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="AEf-9n-hkV"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Capital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-lO-NFc">
-                        <rect key="frame" x="266" y="2" width="54" height="20"/>
+                        <rect key="frame" x="160" y="2" width="160" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="I8S-uY-kBg"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-Bg-RUI">
-                        <rect key="frame" x="0.0" y="24.5" width="36" height="20"/>
+                        <rect key="frame" x="0.0" y="24.5" width="160" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="q9u-V4-j9X"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsb-gX-GwD">
-                        <rect key="frame" x="222" y="24" width="98" height="20.5"/>
+                        <rect key="frame" x="160" y="24" width="160" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="wOf-mZ-r56"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
