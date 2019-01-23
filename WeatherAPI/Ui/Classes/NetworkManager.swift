@@ -16,9 +16,9 @@ class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where Mo
         case didFailedWithError(_ error: Error?)
     }
     
-    var model: ModelType?
+    public var model: ModelType?
     
-    func loadData(url: URL) {
+    public func loadData(url: URL) {
         self.notify(.didStartLoading)
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             let result = data.flatMap { try? JSONDecoder().decode(ModelType.self, from: $0) }

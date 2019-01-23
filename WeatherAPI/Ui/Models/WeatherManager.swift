@@ -10,12 +10,12 @@ import UIKit
 
 class WeatherManager {
     
+    public var completion: F.Completion<Weather>?
+    
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
     private let apiOptions = "&units=metric&appid=b581214660a55dc1348f6e109cac1104"
 
     private let networkManager = NetworkManager<Weather>()
-    
-    var completion: F.Completion<Weather>?
     
     init() {
         _ = self.networkManager.observer { state in
@@ -28,7 +28,7 @@ class WeatherManager {
         }
     }
     
-    func getWeatherData(city: String) {
+    public func getWeatherData(city: String) {
         let stringUrl = self.baseUrl + city + self.apiOptions
         let convertUrl = stringUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = convertUrl.flatMap { URL(string: $0) }

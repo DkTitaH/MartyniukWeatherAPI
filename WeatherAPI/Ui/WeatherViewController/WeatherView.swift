@@ -18,10 +18,10 @@ class WeatherView: UIView {
     
     func fillView(data: Weather) {
         DispatchQueue.main.async {
-            self.label?.text = data.main?.temp.map { Int($0).description + "°" }
+            self.label?.text = data.main?.temp.map { Int($0).description + UnitTemperature.celsius.symbol}
             self.cloudsData?.text = data.clouds?.all.map { $0.description + "%" }
             self.humidityData?.text = data.main?.humidity.map { $0.description + "%" }
-            self.windSpeedData?.text = data.wind?.speed.map { $0.description + "(m/s)" }
+            self.windSpeedData?.text = data.wind?.speed.map { $0.description + UnitSpeed.metersPerSecond.symbol }
             self.cityName?.text = data.name
         }
     }

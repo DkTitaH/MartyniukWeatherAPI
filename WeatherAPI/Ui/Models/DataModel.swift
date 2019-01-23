@@ -9,8 +9,8 @@
 import UIKit
 
 class DataModel {
-    var weather: Weather?
-    var country: Country
+    public var weather: Weather?
+    public var country: Country
     
     init(country: Country, weather: Weather? = nil) {
         self.country = country

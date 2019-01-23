@@ -10,11 +10,11 @@ import UIKit
 
 class CountriesManager {
     
+    public var completion: F.Completion<[Country]>?
+    
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
     private let networkManager = NetworkManager<[Country]>()
-    
-    var completion: F.Completion<[Country]>?
     
     init() {
         _ = networkManager.observer { state in
@@ -27,7 +27,7 @@ class CountriesManager {
         }
     }
     
-    func getCountries() {
+    public func getCountries() {
         let baseUrl = URL(string: self.baseUrl)
         
         let networkManager = self.networkManager
