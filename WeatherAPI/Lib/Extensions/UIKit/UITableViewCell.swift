@@ -10,13 +10,19 @@ import UIKit
 
 extension UITableView {
     
-    
     func register(_ cellClass: AnyClass) {
         self.register(UINib(cellClass), forCellReuseIdentifier: toString(cellClass))
     }
     
-    func dequeueReusableCell(withCellClass cellClass: AnyClass) -> UITableViewCell? {
-        return self.dequeueReusableCell(withIdentifier: toString(cellClass))
+    func dequeueReusableCell<Cell: UITableViewCell>(
+        withCellClass cellClass: Cell.Type,
+        configurator: F.Completion<Cell>
+    )
+        -> Cell
+    {
+        let cell = cast(self.dequeueReusableCell(withIdentifier: toString(cellClass))) ?? Cell()
+        
+        return cell
     }
     
     func dequeueReusableCell(withCellClass cellClass: AnyClass, for indexPath: IndexPath) -> UITableViewCell {

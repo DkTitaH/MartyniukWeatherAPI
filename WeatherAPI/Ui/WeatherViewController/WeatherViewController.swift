@@ -14,14 +14,14 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     
     private(set) var weatherManager = WeatherManager()
     
-    public var escapingHandler: F.Completion<Weather>?
+    public var escapingHandler: F.Completion<WeatherJSON>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.weatherManager.completion = {
-            self.rootView?.fillView(data: $0)
-            self.escapingHandler?($0)
-        }
+//        self.weatherManager.completion = {
+//            self.rootView?.fillView(data: $0)/
+//            self.escapingHandler?($0)
+//        }
     }
 }

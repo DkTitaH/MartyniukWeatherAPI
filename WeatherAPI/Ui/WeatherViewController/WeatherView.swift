@@ -16,14 +16,19 @@ class WeatherView: UIView {
     @IBOutlet var windSpeedData: UILabel?
     @IBOutlet var cityName: UILabel?
     
-    func fillView(data: Weather) {
-        DispatchQueue.main.async {
-            self.label?.text = data.main?.temp.map { Int($0).description + UnitTemperature.celsius.symbol}
-            self.cloudsData?.text = data.clouds?.all.map { $0.description + "%" }
-            self.humidityData?.text = data.main?.humidity.map { $0.description + "%" }
-            self.windSpeedData?.text = data.wind?.speed.map { $0.description + UnitSpeed.metersPerSecond.symbol }
-            self.cityName?.text = data.name
-        }
+    func fillView(weather: Weather) {
+//        DispatchQueue.main.async {
+//            self.label?.text = weather.temperature/
+//                data.main?.temp.map { Int($0).description + UnitTemperature.celsius.symbol}
+//            self.cloudsData?.text = weather.clouds/
+//                data.clouds?.all.map { $0.description + "%" }
+//            self.humidityData?.text = weather.humidity/
+//               data.main?.humidity.map { $0.description + "%" }
+//            self.windSpeedData?.text = weather.windSpeed/
+//                data.wind?.speed.map { $0.description + UnitSpeed.metersPerSecond.symbol }
+//            self.cityName?.text = weather/
+//                data.name
+//        }
     }
 }
 

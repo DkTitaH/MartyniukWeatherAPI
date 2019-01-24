@@ -13,7 +13,7 @@ class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where Mo
     public enum State {
         case didStartLoading
         case didLoad
-        case didFailedWithError(_ error: Error?)
+        case didFailWithError( _ error: Error?)
     }
     
     public var model: ModelType?
@@ -26,7 +26,7 @@ class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where Mo
                 self.model = $0
                 self.notify(.didLoad)
             }
-            error.do { self.notify(.didFailedWithError($0)) }
+            error.do { self.notify(.didFailWithError($0)) }
         }.resume()
     }
 }

@@ -23,3 +23,11 @@ func when<Result>(_ condition: Bool, execute: () -> Result?) -> Result? {
 func cast<Value, Result>(_ value: Value) -> Result? {
     return value as? Result
 }
+
+func toString(_ cls: AnyClass) -> String {
+    return String(describing: cls)
+}
+
+func dispatchOnMain(execute: @escaping F.Execute) {
+    DispatchQueue.main.async(execute: execute)
+}

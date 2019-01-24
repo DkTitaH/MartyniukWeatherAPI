@@ -9,17 +9,8 @@
 import UIKit
 
 class TableViewCell : UITableViewCell {
+    
     override var reuseIdentifier: String? {
         return toString(type(of: self))
     }
 }
-
-class Cell : TableViewCell {
-    
-}
-    
-func toString(_ cls: AnyClass) -> String {
-    return String(describing: cls)
-}
-
-

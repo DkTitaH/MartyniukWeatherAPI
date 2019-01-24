@@ -10,11 +10,11 @@ import UIKit
 
 class CountriesManager {
     
-    public var completion: F.Completion<[Country]>?
+    public var completion: F.Completion<[CountryJSON]>?
     
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
-    private let networkManager = NetworkManager<[Country]>()
+    private let networkManager = NetworkManager<[CountryJSON]>()
     
     init() {
         _ = networkManager.observer { state in

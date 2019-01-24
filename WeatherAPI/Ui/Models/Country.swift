@@ -1,14 +1,20 @@
 //
-//  Countries.swift
+//  Country.swift
 //  WeatherAPI
 //
-//  Created by Student on 14.01.2019.
+//  Created by Student on 24.01.2019.
 //  Copyright © 2019 Student. All rights reserved.
 //
 
 import Foundation
 
-struct Country: Codable {
-    let name: String?
-    let capital: String?
+class Country {
+    
+    public let name: String?
+    public let capitalName: String?
+    
+    init(countryJSON: CountryJSON) {
+        self.name = countryJSON.name
+        self.capitalName = countryJSON.capitalName
+    }
 }
