@@ -10,22 +10,25 @@ import UIKit
 
 class WeatherManager {
     
-    public var completion: F.Completion<WeatherJSON>?
+//    public var completion: F.Completion<WeatherJSON>?
     
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
     private let apiOptions = "&units=metric&appid=b581214660a55dc1348f6e109cac1104"
 
+    private(set) var weather: Weather? = nil
+    
     private let networkManager = NetworkManager<WeatherJSON>()
     
     init() {
-        _ = self.networkManager.observer { state in
-            switch state {
-            case .didLoad:
-                self.networkManager.model.do { self.completion?($0) }
-            default:
-                return
-            }
-        }
+//        _ = self.networkManager.observer { state in
+//            switch state {
+//            case .didLoad:
+//                return
+//                self.networkManager.model.do { self.completion?($0) }
+//            default:
+//                return
+//            }
+//        }
     }
     
     public func getWeatherData(city: String) {
@@ -35,7 +38,11 @@ class WeatherManager {
         
         let networkManager = self.networkManager
         
-        url.do { networkManager.loadData(url: $0) }
-        networkManager.model.do { self.completion?($0) }
+        guard let baseUrl = url else { return }
+
+        networkManager.loadData(url: baseUrl) { weather, error in
+            weather.do { self.weather = Weather(weatherJSON: $0) }
+            
+        }
     }
 }

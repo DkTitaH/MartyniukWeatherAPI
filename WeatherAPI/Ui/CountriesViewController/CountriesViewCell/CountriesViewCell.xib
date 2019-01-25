@@ -19,55 +19,41 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-Dd-Q9k">
-                        <rect key="frame" x="0.0" y="2" width="160" height="20.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="160" id="AEf-9n-hkV"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="2" width="62" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Capital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-lO-NFc">
-                        <rect key="frame" x="160" y="2" width="160" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="160" id="I8S-uY-kBg"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Capital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-lO-NFc">
+                        <rect key="frame" x="267" y="2" width="53" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsb-gX-GwD">
-                        <rect key="frame" x="160" y="24" width="160" height="20.5"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20.5" id="aGG-qd-fDd"/>
-                            <constraint firstAttribute="width" constant="160" id="wOf-mZ-r56"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-Bg-RUI">
+                        <rect key="frame" x="0.0" y="24" width="36" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-Bg-RUI">
-                        <rect key="frame" x="0.0" y="24.5" width="160" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="5K9-zY-cbm"/>
-                            <constraint firstAttribute="width" constant="160" id="q9u-V4-j9X"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsb-gX-GwD">
+                        <rect key="frame" x="223" y="24" width="97" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ARN-GX-KNm"/>
-                    <constraint firstItem="tsb-gX-GwD" firstAttribute="top" secondItem="8iC-lO-NFc" secondAttribute="bottom" constant="2" id="B3C-aF-M5a"/>
-                    <constraint firstAttribute="trailing" secondItem="tsb-gX-GwD" secondAttribute="trailing" id="DJS-sW-H8m"/>
-                    <constraint firstAttribute="trailing" secondItem="8iC-lO-NFc" secondAttribute="trailing" id="J3b-W7-vRe"/>
-                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Td1-cy-yPh"/>
-                    <constraint firstAttribute="bottom" secondItem="7fq-Bg-RUI" secondAttribute="bottom" constant="2" id="XGj-T6-guX"/>
-                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="top" secondItem="vCS-Dd-Q9k" secondAttribute="bottom" constant="2" id="kQO-tX-FlO"/>
-                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="n8u-hd-mir"/>
-                    <constraint firstAttribute="bottom" secondItem="tsb-gX-GwD" secondAttribute="bottom" constant="2" id="tuX-OJ-xmX"/>
-                    <constraint firstItem="8iC-lO-NFc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="vUB-Gv-9qv"/>
+                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="top" secondItem="vCS-Dd-Q9k" secondAttribute="bottom" constant="2" id="2wP-k4-LZb"/>
+                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="45W-F2-x1j"/>
+                    <constraint firstItem="tsb-gX-GwD" firstAttribute="top" secondItem="8iC-lO-NFc" secondAttribute="bottom" constant="2" id="5uq-Yi-hbf"/>
+                    <constraint firstItem="8iC-lO-NFc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="9RD-r2-a3W"/>
+                    <constraint firstAttribute="trailing" secondItem="8iC-lO-NFc" secondAttribute="trailing" id="Dt6-lv-7ai"/>
+                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EMS-gM-Syk"/>
+                    <constraint firstAttribute="bottom" secondItem="7fq-Bg-RUI" secondAttribute="bottom" constant="2" id="JnI-h1-HEw"/>
+                    <constraint firstAttribute="bottom" secondItem="tsb-gX-GwD" secondAttribute="bottom" constant="2" id="cCy-8V-rKK"/>
+                    <constraint firstAttribute="trailing" secondItem="tsb-gX-GwD" secondAttribute="trailing" id="g0j-LE-Sg3"/>
+                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="gki-Fo-8dw"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -77,7 +63,7 @@
                 <outlet property="date" destination="7fq-Bg-RUI" id="DIB-DF-sfF"/>
                 <outlet property="temperature" destination="tsb-gX-GwD" id="Nd6-wQ-ZsY"/>
             </connections>
-            <point key="canvasLocation" x="276.80000000000001" y="165.06746626686657"/>
+            <point key="canvasLocation" x="224" y="47"/>
         </tableViewCell>
     </objects>
 </document>

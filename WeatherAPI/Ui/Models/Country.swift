@@ -15,6 +15,6 @@ class Country {
     
     init(countryJSON: CountryJSON) {
         self.name = countryJSON.name
-        self.capitalName = countryJSON.capitalName
+        self.capitalName = countryJSON.capital
     }
 }

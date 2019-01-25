@@ -21,6 +21,7 @@ extension UITableView {
         -> Cell
     {
         let cell = cast(self.dequeueReusableCell(withIdentifier: toString(cellClass))) ?? Cell()
+        configurator(cell)
         
         return cell
     }

@@ -16,17 +16,12 @@ class NetworkManager<ModelType>: ObservableObject<NetworkManager.State> where Mo
         case didFailWithError( _ error: Error?)
     }
     
-    public var model: ModelType?
-    
-    public func loadData(url: URL) {
+    public func loadData(url: URL, completion: @escaping F.Completion<(ModelType?, Error?)>) {
         self.notify(.didStartLoading)
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             let result = data.flatMap { try? JSONDecoder().decode(ModelType.self, from: $0) }
-            result.do {
-                self.model = $0
-                self.notify(.didLoad)
-            }
-            error.do { self.notify(.didFailWithError($0)) }
+            self.notify(.didLoad)
+            completion((result,error))
         }.resume()
     }
 }

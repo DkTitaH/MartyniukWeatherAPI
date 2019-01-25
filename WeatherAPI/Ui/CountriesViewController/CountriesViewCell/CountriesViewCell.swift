@@ -17,21 +17,18 @@ class CountriesViewCell: TableViewCell {
     
     public func fillCell(model: DataModel) {
         let country = model.country
-        
+
         self.countryName?.text = country.name
         self.capitalName?.text = country.capitalName
         
-//        if let weather = model.weather {
-            self.temperature?.text = model.weather?.temperature?.description
-        self.date?.text = model.weather?.date?.description
-//            self.date?.text = model.weather.
-//                weather.main?.temp?.rounded().description
-//            weather.dt.do { self.date?.text =
-//                self.dateUTCtoString(date: Date(timeIntervalSince1970: TimeInterval($0))) }
-//        } else {
-//            self.temperature?.text = nil
-//            self.date?.text = nil
-//        }
+        if let weather = model.weather {
+            self.temperature?.text = weather.temperature?.description
+            weather.date.do { self.date?.text = self.dateUTCtoString(date: Date(timeIntervalSince1970: TimeInterval($0))) }
+        }
+        else {
+            self.temperature?.text = nil
+            self.date?.text = nil
+        }
     }
     
     private func dateUTCtoString(date: Date) -> String {

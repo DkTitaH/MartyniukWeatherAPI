@@ -10,29 +10,25 @@ import UIKit
 
 class CountriesManager {
     
-    public var completion: F.Completion<[CountryJSON]>?
-    
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
+    
+    private(set) var countries: [Country]? = nil
     
     private let networkManager = NetworkManager<[CountryJSON]>()
     
-    init() {
-        _ = networkManager.observer { state in
-            switch state {
-            case .didLoad:
-                self.networkManager.model.do { self.completion?($0) }
-            default:
-                return
-            }
-        }
-    }
-    
-    public func getCountries() {
+    public func getCountries(completion: @escaping F.Completion<[Country]>) {
         let baseUrl = URL(string: self.baseUrl)
         
         let networkManager = self.networkManager
         
-        baseUrl.do { networkManager.loadData(url: $0) }
-        networkManager.model.do { self.completion?($0) }
+        guard let url = baseUrl else { return }
+
+        networkManager.loadData(url: url) { countries, error in
+            error.do { print($0) }
+            countries.do {
+                let countries = $0.map { Country(countryJSON: $0) }
+                completion(countries)
+            }
+        }
     }
 }
