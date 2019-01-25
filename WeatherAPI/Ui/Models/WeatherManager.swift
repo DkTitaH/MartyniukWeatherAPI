@@ -31,7 +31,7 @@ class WeatherManager {
 //        }
     }
     
-    public func getWeatherData(city: String) {
+    public func getWeatherData(city: String, completion: @escaping F.Completion<Weather>) {
         let stringUrl = self.baseUrl + city + self.apiOptions
         let convertUrl = stringUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = convertUrl.flatMap { URL(string: $0) }
@@ -41,8 +41,13 @@ class WeatherManager {
         guard let baseUrl = url else { return }
 
         networkManager.loadData(url: baseUrl) { weather, error in
-            weather.do { self.weather = Weather(weatherJSON: $0) }
-            
+            weather.do {
+                print("getWeather")
+                let weather = Weather(weatherJSON: $0)
+                self.weather = weather
+
+                completion(weather)
+            }
         }
     }
 }

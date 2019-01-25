@@ -28,10 +28,7 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         let countriesManager = self.countriesManager
         
         countriesManager.getCountries {
-//            self.models =
-            let a = $0.map { DataModel(country: $0) }
-            self.models = a
-            print(a.count)
+            self.models = $0.map { DataModel(country: $0) }
         }
         
         table?.register(CountriesViewCell.self)
@@ -55,7 +52,16 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         let index = indexPath.row
         let cityName = self.models?[index].country.capitalName
         
-        cityName.do { weatherViewController.weatherManager.getWeatherData(city: $0) }
+        cityName.do {
+            weatherViewController.weatherManager.getWeatherData(city: $0) { weather in
+                self.models?[index].weather = weather
+                dispatchOnMain {
+                    weatherViewController.rootView?.fillView(weather: weather)
+                    self.rootView?.table?.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                }
+
+            }
+        }
         
         self.navigationController?.pushViewController(weatherViewController, animated: true)
     }

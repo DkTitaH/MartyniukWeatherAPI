@@ -17,6 +17,11 @@ class WeatherView: UIView {
     @IBOutlet var cityName: UILabel?
     
     func fillView(weather: Weather) {
+        self.label?.text = weather.temperature?.description
+        self.cloudsData?.text = weather.clouds?.description
+        self.humidityData?.text = weather.humidity?.description
+        self.windSpeedData?.text = weather.windSpeed?.description
+        self.cityName?.text = weather.cityName?.description
 //        DispatchQueue.main.async {
 //            self.label?.text = weather.temperature/
 //                data.main?.temp.map { Int($0).description + UnitTemperature.celsius.symbol}
