@@ -8,27 +8,28 @@
 
 import UIKit
 
-class CountriesManager {
+class CountriesManager: ObservableObject<([Country]?, Error?)> {
+    
+    private(set) var countries: [Country]?
     
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
-    private(set) var countries: [Country]? = nil
+    private let networkManager = RequestService<[CountryJSON]>()
     
-    private let networkManager = NetworkManager<[CountryJSON]>()
+    override init() {
+        super.init()
+        self.getCountries()
+    }
     
-    public func getCountries(completion: @escaping F.Completion<[Country]>) {
+    public func getCountries() {
         let baseUrl = URL(string: self.baseUrl)
         
-        let networkManager = self.networkManager
-        
         guard let url = baseUrl else { return }
-
-        networkManager.loadData(url: url) { countries, error in
-            error.do { print($0) }
-            countries.do {
-                let countries = $0.map { Country(countryJSON: $0) }
-                completion(countries)
-            }
+        
+        self.networkManager.loadData(url: url) { countries, error in
+            let countriesData = countries?.compactMap { Country(countryJSON: $0) }
+            self.countries = countriesData
+            self.notify((countriesData,error))
         }
     }
 }

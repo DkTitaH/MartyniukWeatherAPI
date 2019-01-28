@@ -43,7 +43,7 @@
 		3F777F0C21EC840C0069135B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F777F0B21EC840C0069135B /* Color.swift */; };
 		3F777F0F21ECA7100069135B /* CountryJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F777F0E21ECA7100069135B /* CountryJSON.swift */; };
 		3F777F1221ECA7200069135B /* WeatherJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F777F1121ECA7200069135B /* WeatherJSON.swift */; };
-		3F777F1521ECAA910069135B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F777F1421ECAA910069135B /* NetworkManager.swift */; };
+		3F777F1521ECAA910069135B /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F777F1421ECAA910069135B /* RequestService.swift */; };
 		3FAFE60B21FB3981000CE31E /* CountriesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAFE60921FB3981000CE31E /* CountriesViewCell.xib */; };
 		3FAFE60C21FB3981000CE31E /* CountriesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAFE60A21FB3981000CE31E /* CountriesViewCell.swift */; };
 		3FBBB1D221F9BABA00BA49F2 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBBB1D121F9BABA00BA49F2 /* Weather.swift */; };
@@ -113,7 +113,7 @@
 		3F777F0B21EC840C0069135B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3F777F0E21ECA7100069135B /* CountryJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryJSON.swift; sourceTree = "<group>"; };
 		3F777F1121ECA7200069135B /* WeatherJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherJSON.swift; sourceTree = "<group>"; };
-		3F777F1421ECAA910069135B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3F777F1421ECAA910069135B /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		3FAFE60921FB3981000CE31E /* CountriesViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountriesViewCell.xib; sourceTree = "<group>"; };
 		3FAFE60A21FB3981000CE31E /* CountriesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewCell.swift; sourceTree = "<group>"; };
 		3FBBB1D121F9BABA00BA49F2 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -321,11 +321,11 @@
 			children = (
 				3F1FA91321F5D3A2002E9143 /* DataModel.swift */,
 				3F777F0E21ECA7100069135B /* CountryJSON.swift */,
-				3FBBB1D321F9BAC300BA49F2 /* Country.swift */,
 				3F777F1121ECA7200069135B /* WeatherJSON.swift */,
+				3FBBB1D321F9BAC300BA49F2 /* Country.swift */,
 				3FBBB1D121F9BABA00BA49F2 /* Weather.swift */,
-				3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */,
 				3F02AAA121F0C8D300413D21 /* CountriesManager.swift */,
+				3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -333,7 +333,7 @@
 		3F777F1321ECAA880069135B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3F777F1421ECAA910069135B /* NetworkManager.swift */,
+				3F777F1421ECAA910069135B /* RequestService.swift */,
 				3FE79C9521EF305100E253CD /* TableViewCell.swift */,
 			);
 			path = Classes;
@@ -509,7 +509,7 @@
 				3F5D61DA21E73B9E003603F1 /* DispatchQueue+Extensions.swift in Sources */,
 				3FE79C9821EF308000E253CD /* UINib+Extensions.swift in Sources */,
 				3F5D61DD21E73B9E003603F1 /* DispatchTime+Extensions.swift in Sources */,
-				3F777F1521ECAA910069135B /* NetworkManager.swift in Sources */,
+				3F777F1521ECAA910069135B /* RequestService.swift in Sources */,
 				3F777F0C21EC840C0069135B /* Color.swift in Sources */,
 				3F5D615121E737C1003603F1 /* WeatherView.swift in Sources */,
 				3F02AAA221F0C8D300413D21 /* CountriesManager.swift in Sources */,

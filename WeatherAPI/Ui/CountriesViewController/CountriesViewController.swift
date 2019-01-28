@@ -23,15 +23,14 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rootView = self.rootView
-        let table = rootView?.table
-        let countriesManager = self.countriesManager
-        
-        countriesManager.getCountries {
-            self.models = $0.map { DataModel(country: $0) }
+        _ = self.countriesManager.observer { countries, error in
+            self.models = countries?.compactMap { DataModel(country: $0) }
+            error.do { print($0) }
         }
         
-        table?.register(CountriesViewCell.self)
+        self.countriesManager.getCountries()
+        
+        self.rootView?.table?.register(CountriesViewCell.self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,18 +47,22 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let weatherViewController = WeatherViewController()
+        let weatherManager = weatherViewController.weatherManager
+        let model = self.models?[indexPath.row]
         
-        let index = indexPath.row
-        let cityName = self.models?[index].country.capitalName
-        
-        cityName.do {
-            weatherViewController.weatherManager.getWeatherData(city: $0) { weather in
-                self.models?[index].weather = weather
-                dispatchOnMain {
-                    weatherViewController.rootView?.fillView(weather: weather)
-                    self.rootView?.table?.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+        model.do { model in
+            model.country.capitalName.do {
+                weatherManager.getWeatherData(city: $0)
+                _ = weatherManager.observer { weather, error in
+                    model.weather = weather
+                    error.do { print($0) }
+                    dispatchOnMain {
+                        tableView.reloadRows(
+                            at: [indexPath],
+                            with: UITableView.RowAnimation.none
+                        )
+                    }
                 }
-
             }
         }
         

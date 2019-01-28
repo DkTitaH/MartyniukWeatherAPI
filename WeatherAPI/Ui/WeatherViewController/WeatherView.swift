@@ -16,24 +16,18 @@ class WeatherView: UIView {
     @IBOutlet var windSpeedData: UILabel?
     @IBOutlet var cityName: UILabel?
     
-    func fillView(weather: Weather) {
-        self.label?.text = weather.temperature?.description
-        self.cloudsData?.text = weather.clouds?.description
-        self.humidityData?.text = weather.humidity?.description
-        self.windSpeedData?.text = weather.windSpeed?.description
-        self.cityName?.text = weather.cityName?.description
-//        DispatchQueue.main.async {
-//            self.label?.text = weather.temperature/
-//                data.main?.temp.map { Int($0).description + UnitTemperature.celsius.symbol}
-//            self.cloudsData?.text = weather.clouds/
-//                data.clouds?.all.map { $0.description + "%" }
-//            self.humidityData?.text = weather.humidity/
-//               data.main?.humidity.map { $0.description + "%" }
-//            self.windSpeedData?.text = weather.windSpeed/
-//                data.wind?.speed.map { $0.description + UnitSpeed.metersPerSecond.symbol }
-//            self.cityName?.text = weather/
-//                data.name
-//        }
+    public func fillView(weather: Weather) {
+        let stringWithPercent = self.stringWithPercent
+        
+        self.label?.text = weather.temperature.map { String($0) + UnitTemperature.celsius.symbol }
+        self.cloudsData?.text = weather.clouds.map(stringWithPercent)
+        self.humidityData?.text = weather.humidity.map(stringWithPercent)
+        self.windSpeedData?.text = weather.windSpeed.map { String($0) + UnitSpeed.metersPerSecond.symbol }
+        self.cityName?.text = weather.cityName
+    }
+    
+    private func stringWithPercent(value: CustomStringConvertible) -> String {
+        return "\(value)%"
     }
 }
 
