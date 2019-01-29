@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CountriesManager: ObservableObject<([Country]?, Error?)> {
+class CountriesManager: ObservableObject<(DataModels?, Error?)> {
     
-    private(set) var countries: [Country]?
+    private(set) var model: DataModels?
     
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
@@ -21,15 +21,16 @@ class CountriesManager: ObservableObject<([Country]?, Error?)> {
         self.getCountries()
     }
     
-    public func getCountries() {
+    private func getCountries() {
         let baseUrl = URL(string: self.baseUrl)
         
         guard let url = baseUrl else { return }
         
         self.networkManager.loadData(url: url) { countries, error in
-            let countriesData = countries?.compactMap { Country(countryJSON: $0) }
-            self.countries = countriesData
-            self.notify((countriesData,error))
+            let countriesData = countries?.map { Country(countryJSON: $0) }
+            let dataModels = countriesData?.map { DataModel(country: $0) }
+            dataModels.do { self.model = DataModels.init(with: $0) }
+            self.notify((self.model,error))
         }
     }
 }

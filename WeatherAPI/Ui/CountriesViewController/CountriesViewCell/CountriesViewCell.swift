@@ -18,10 +18,10 @@ class CountriesViewCell: TableViewCell {
     public func fillCell(model: DataModel) {
         let country = model.country
         
-        self.countryName?.text = country.name
-        self.capitalName?.text = country.capitalName
+        self.countryName?.text = country.value.name
+        self.capitalName?.text = country.value.capitalName
         
-        if let weather = model.weather {
+        if let weather = model.weather.value {
             self.temperature?.text = weather.temperature?.description
             weather.date.do { self.date?.text = self.dateUTCtoString(date: Date(timeIntervalSince1970: TimeInterval($0))) }
         } else {

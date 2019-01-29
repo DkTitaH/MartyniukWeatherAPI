@@ -14,14 +14,30 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     
     let weatherManager = WeatherManager()
     
+    private var model: DataModel?
+    
+    func fill(with model: DataModel?) {
+        self.model = model
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         _ = self.weatherManager.observer { weather, error in
-            dispatchOnMain {
-                weather.do { self.rootView?.fillView(weather: $0) }
-                error.do { print($0) }
+            weather.do { value in
+                self.prepareView(with: value)
+                self.model?.weather.value = value
             }
+            
+            error.do { print($0) }
+        }
+        
+        self.weatherManager.getWeatherData(city: self.model?.country.value.capitalName ?? "")
+    }
+    
+    private func prepareView(with weather: Weather) {
+        dispatchOnMain {
+            self.rootView?.fillView(weather: weather)
         }
     }
 }

@@ -14,6 +14,7 @@ class ObservableObject<State> {
     
     private let observers = Observers()
     
+    @discardableResult
     public func observer(handler: @escaping Handler) -> Observer {
         let observer = Observer(sender: self, handler: handler)
         self.observers.append(observer: observer)
