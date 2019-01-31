@@ -19,9 +19,7 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
             _ = model?.observer { state in
                 switch state {
                 case .weatherDidChanged(_):
-                    dispatchOnMain {
-                        self.rootView?.table?.reloadData()
-                    }
+                    self.reloadData()
                 case .countryDidChanged(_):
                     return
                 }
@@ -33,7 +31,10 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         _ = self.countriesManager.observer { dataModel, error in
-            dataModel.do { self.model = $0 }
+            dataModel.do {
+                self.model = $0
+                self.reloadData()
+            }
             error.do { print($0) }
         }
         
@@ -59,4 +60,12 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.navigationController?.pushViewController(weatherViewController, animated: true)
     }
+    
+    private func reloadData() {
+        dispatchOnMain {
+            self.rootView?.table?.reloadData()
+        }
+    }
 }
+
+
