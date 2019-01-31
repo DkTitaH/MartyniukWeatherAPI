@@ -22,16 +22,13 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         _ = self.weatherManager.observer { weather, error in
             weather.do { value in
                 self.prepareView(with: value)
                 self.model?.weather.value = value
             }
-            
             error.do { print($0) }
         }
-        
         self.weatherManager.getWeatherData(city: self.model?.country.value.capitalName ?? "")
     }
     

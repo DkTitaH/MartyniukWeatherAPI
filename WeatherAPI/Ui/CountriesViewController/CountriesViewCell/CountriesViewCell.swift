@@ -16,17 +16,14 @@ class CountriesViewCell: TableViewCell {
     @IBOutlet var temperature: UILabel?
     
     public func fillCell(model: DataModel) {
-        let country = model.country
+        let country = model.country.value
         
-        self.countryName?.text = country.value.name
-        self.capitalName?.text = country.value.capitalName
+        self.countryName?.text = country.name
+        self.capitalName?.text = country.capitalName
         
         if let weather = model.weather.value {
             self.temperature?.text = weather.temperature?.description
             weather.date.do { self.date?.text = self.dateUTCtoString(date: Date(timeIntervalSince1970: TimeInterval($0))) }
-        } else {
-            self.temperature?.text = nil
-            self.date?.text = nil
         }
     }
     
