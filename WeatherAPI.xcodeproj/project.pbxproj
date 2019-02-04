@@ -10,6 +10,7 @@
 		3F02AAA021F0A2F800413D21 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */; };
 		3F02AAA221F0C8D300413D21 /* CountriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02AAA121F0C8D300413D21 /* CountriesManager.swift */; };
 		3F1FA91421F5D3A2002E9143 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1FA91321F5D3A2002E9143 /* DataModel.swift */; };
+		3F4AFC5B22043D0F00B79601 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AFC5A22043D0F00B79601 /* Parser.swift */; };
 		3F5D611E21E7371A003603F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D611D21E7371A003603F1 /* AppDelegate.swift */; };
 		3F5D612521E7371B003603F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D612421E7371B003603F1 /* Assets.xcassets */; };
 		3F5D612821E7371B003603F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D612621E7371B003603F1 /* LaunchScreen.storyboard */; };
@@ -76,6 +77,7 @@
 		3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		3F02AAA121F0C8D300413D21 /* CountriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesManager.swift; sourceTree = "<group>"; };
 		3F1FA91321F5D3A2002E9143 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		3F4AFC5A22043D0F00B79601 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		3F5D611A21E7371A003603F1 /* WeatherAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5D611D21E7371A003603F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F5D612421E7371B003603F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,6 +177,8 @@
 		3F5D611C21E7371A003603F1 /* WeatherAPI */ = {
 			isa = PBXGroup;
 			children = (
+				3F777F0D21ECA6FF0069135B /* Models */,
+				3F777F1321ECAA880069135B /* Classes */,
 				3F5D61B821E73B9E003603F1 /* Lib */,
 				3F5D614B21E7377D003603F1 /* Ui */,
 				3F5D611D21E7371A003603F1 /* AppDelegate.swift */,
@@ -206,8 +210,6 @@
 		3F5D614B21E7377D003603F1 /* Ui */ = {
 			isa = PBXGroup;
 			children = (
-				3F777F1321ECAA880069135B /* Classes */,
-				3F777F0D21ECA6FF0069135B /* Models */,
 				3F5D61E821E75B16003603F1 /* CountriesViewController */,
 				3F5D61E721E75B05003603F1 /* WeatherViewController */,
 			);
@@ -333,7 +335,8 @@
 				3F02AAA121F0C8D300413D21 /* CountriesManager.swift */,
 				3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */,
 			);
-			path = Models;
+			name = Models;
+			path = Ui/Models;
 			sourceTree = "<group>";
 		};
 		3F777F1321ECAA880069135B /* Classes */ = {
@@ -341,8 +344,10 @@
 			children = (
 				3F777F1421ECAA910069135B /* RequestService.swift */,
 				3FE79C9521EF305100E253CD /* TableViewCell.swift */,
+				3F4AFC5A22043D0F00B79601 /* Parser.swift */,
 			);
-			path = Classes;
+			name = Classes;
+			path = Lib/Classes;
 			sourceTree = "<group>";
 		};
 		3FAFE60821FB3981000CE31E /* CountriesViewCell */ = {
@@ -499,6 +504,7 @@
 				3F90CA82220066BB009C7256 /* Wrapper.swift in Sources */,
 				3F5D61D321E73B9E003603F1 /* AbstractCancellableProperty.swift in Sources */,
 				3F777F0F21ECA7100069135B /* CountryJSON.swift in Sources */,
+				3F4AFC5B22043D0F00B79601 /* Parser.swift in Sources */,
 				3F5D61DC21E73B9E003603F1 /* NSLocking+Extension.swift in Sources */,
 				3F5D61D521E73B9E003603F1 /* F.swift in Sources */,
 				3F5D61EB21E75B38003603F1 /* CountriesViewController.swift in Sources */,

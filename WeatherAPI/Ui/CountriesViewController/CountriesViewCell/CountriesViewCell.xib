@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,67 +18,50 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-Dd-Q9k">
-                        <rect key="frame" x="0.0" y="2" width="160" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="160" id="AEf-9n-hkV"/>
-                            <constraint firstAttribute="height" constant="20" id="Ga0-2i-7Wo"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="0.0" width="62" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Capital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-lO-NFc">
-                        <rect key="frame" x="160" y="2" width="160" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="160" id="I8S-uY-kBg"/>
-                            <constraint firstAttribute="height" constant="20" id="IDe-oO-blA"/>
-                        </constraints>
+                        <rect key="frame" x="267" y="0.0" width="53" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-Bg-RUI">
-                        <rect key="frame" x="0.0" y="24" width="160" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="160" id="q9u-V4-j9X"/>
-                            <constraint firstAttribute="height" constant="20" id="yCh-zs-3bm"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="24" width="36" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsb-gX-GwD">
-                        <rect key="frame" x="160" y="24" width="160" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="ssj-yK-0Jd"/>
-                            <constraint firstAttribute="width" constant="160" id="wOf-mZ-r56"/>
-                        </constraints>
+                        <rect key="frame" x="223" y="23" width="97" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ARN-GX-KNm"/>
-                    <constraint firstItem="tsb-gX-GwD" firstAttribute="top" secondItem="8iC-lO-NFc" secondAttribute="bottom" constant="2" id="B3C-aF-M5a"/>
-                    <constraint firstAttribute="trailing" secondItem="tsb-gX-GwD" secondAttribute="trailing" id="DJS-sW-H8m"/>
-                    <constraint firstAttribute="trailing" secondItem="8iC-lO-NFc" secondAttribute="trailing" id="J3b-W7-vRe"/>
-                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Td1-cy-yPh"/>
-                    <constraint firstAttribute="bottom" secondItem="7fq-Bg-RUI" secondAttribute="bottom" constant="2" id="XGj-T6-guX"/>
-                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="top" secondItem="vCS-Dd-Q9k" secondAttribute="bottom" constant="2" id="kQO-tX-FlO"/>
-                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="n8u-hd-mir"/>
-                    <constraint firstAttribute="bottom" secondItem="tsb-gX-GwD" secondAttribute="bottom" constant="2" id="tuX-OJ-xmX"/>
-                    <constraint firstItem="8iC-lO-NFc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="vUB-Gv-9qv"/>
+                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7En-33-MxQ"/>
+                    <constraint firstItem="tsb-gX-GwD" firstAttribute="top" secondItem="8iC-lO-NFc" secondAttribute="bottom" constant="2" id="DUr-Sl-2lr"/>
+                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="top" secondItem="vCS-Dd-Q9k" secondAttribute="bottom" constant="2" id="Jxs-JQ-JSg"/>
+                    <constraint firstItem="7fq-Bg-RUI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="K4j-9C-vcb"/>
+                    <constraint firstItem="8iC-lO-NFc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ajt-AU-UI1"/>
+                    <constraint firstAttribute="trailing" secondItem="8iC-lO-NFc" secondAttribute="trailing" id="bdU-ni-gn9"/>
+                    <constraint firstAttribute="bottom" secondItem="tsb-gX-GwD" secondAttribute="bottom" constant="2" id="d7T-bq-raI"/>
+                    <constraint firstAttribute="bottom" secondItem="7fq-Bg-RUI" secondAttribute="bottom" constant="2" id="iCg-go-GHT"/>
+                    <constraint firstItem="vCS-Dd-Q9k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ssl-BT-R5c"/>
+                    <constraint firstAttribute="trailing" secondItem="tsb-gX-GwD" secondAttribute="trailing" id="vpO-Kl-i9j"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="capitalName" destination="8iC-lO-NFc" id="dHF-kP-Xdz"/>
                 <outlet property="countryName" destination="vCS-Dd-Q9k" id="rzf-8x-ABt"/>
                 <outlet property="date" destination="7fq-Bg-RUI" id="DIB-DF-sfF"/>
                 <outlet property="temperature" destination="tsb-gX-GwD" id="Nd6-wQ-ZsY"/>
             </connections>
-            <point key="canvasLocation" x="276.80000000000001" y="165.06746626686657"/>
+            <point key="canvasLocation" x="-251.19999999999999" y="142.57871064467767"/>
         </tableViewCell>
     </objects>
 </document>

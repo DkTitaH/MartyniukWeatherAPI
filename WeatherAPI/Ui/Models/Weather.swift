@@ -17,14 +17,12 @@ class Weather {
     public let cityName: String?
     public let date: Int?
     
-    init(weatherJSON: WeatherJSON) {
-        let main = weatherJSON.main
-        
-        self.temperature = main?.temp.map { Int($0) }
-        self.humidity = main?.humidity
-        self.clouds = weatherJSON.clouds?.all
-        self.windSpeed = weatherJSON.wind?.speed.map { Int($0) }
-        self.cityName = weatherJSON.name
-        self.date = weatherJSON.dt
+    init(temperatue: Int?, humidity: Int?, clouds: Int?, windSpeed: Int?, cityName: String?, date: Int?) {
+        self.temperature = temperatue
+        self.humidity = humidity
+        self.clouds = clouds
+        self.windSpeed = windSpeed
+        self.cityName = cityName
+        self.date = date
     }
 }

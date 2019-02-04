@@ -9,6 +9,6 @@
 import Foundation
 
 struct CountryJSON: Codable {
-    let name: String?
-    let capital: String?
+    let name: String
+    let capital: String
 }

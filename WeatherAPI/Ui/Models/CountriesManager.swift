@@ -8,29 +8,27 @@
 
 import UIKit
 
-class CountriesManager: ObservableObject<(DataModels?, Error?)> {
-    
-    private(set) var model: DataModels?
+class CountriesManager {
     
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
-    private let networkManager = RequestService<[CountryJSON]>()
+    private let requestService: RequestService<[CountryJSON]>
+    private let parser = Parser()
     
-    override init() {
-        super.init()
-        self.getCountries()
+    init(requestService: RequestService<[CountryJSON]>) {
+        self.requestService = requestService
     }
     
-    private func getCountries() {
+    public func getCountries(model: DataModels) {
         let baseUrl = URL(string: self.baseUrl)
         
         guard let url = baseUrl else { return }
         
-        self.networkManager.loadData(url: url) { countries, error in
-            let countriesData = countries?.map { Country(countryJSON: $0) }
-            let dataModels = countriesData?.map { DataModel(country: $0) }
-            dataModels.do { self.model = DataModels.init(with: $0) }
-            self.notify((self.model,error))
+        self.requestService.loadData(url: url) { countries, error in
+            let countriesData = countries?.map { self.parser.country(from: $0) }
+            countriesData?.forEach { model.append(country: $0) }
         }
     }
 }
+
+

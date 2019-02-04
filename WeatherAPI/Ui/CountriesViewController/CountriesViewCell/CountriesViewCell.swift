@@ -15,28 +15,34 @@ class CountriesViewCell: TableViewCell {
     @IBOutlet var date: UILabel?
     @IBOutlet var temperature: UILabel?
     
-    public func fillCell(model: DataModel) {
-        let country = model.country.value
+    public func fillCell(model: Country) {
+        let country = model
+        let weather = model.weather
         
         self.countryName?.text = country.name
         self.capitalName?.text = country.capitalName
-        
-        if let weather = model.weather.value {
-            self.temperature?.text = weather.temperature?.description
-            weather.date.do { self.date?.text = self.dateUTCtoString(date: Date(timeIntervalSince1970: TimeInterval($0))) }
-        }
+        self.temperature?.text = weather?.temperature.map { String($0) }
+        self.date?.text = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)).toString() }
     }
     
-    private func dateUTCtoString(date: Date) -> String {
-        let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ua_UA")
-            formatter.dateStyle = .short
-            formatter.timeStyle = .short
-            
-            return formatter
-        }()
+
+}
+
+extension Date {
+    
+    func toString() -> String {
+        return DateFormatter.shortDateFormatterUA.string(from: self)
+    }
+}
+
+extension DateFormatter {
+    
+    static var shortDateFormatterUA: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ua_UA")
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
         
-        return dateFormatter.string(from: date)
+        return formatter
     }
 }

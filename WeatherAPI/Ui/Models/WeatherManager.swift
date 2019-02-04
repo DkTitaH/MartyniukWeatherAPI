@@ -8,26 +8,32 @@
 
 import UIKit
 
-class WeatherManager: ObservableObject<(Weather?, Error?)> {
-    
-    private(set) var weather: Weather?
+class WeatherManager {
     
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
     private let apiOptions = "&units=metric&appid=b581214660a55dc1348f6e109cac1104"
     
-    private let networkManager = RequestService<WeatherJSON>()
+    private let requestService: RequestService<WeatherJSON>
+    private let parser = Parser()
     
-    public func getWeatherData(city: String) {
-        let stringUrl = self.baseUrl + city + self.apiOptions
+    init(requestService: RequestService<WeatherJSON>) {
+        self.requestService = requestService
+    }
+    
+    public func getWeatherData(model: Wrapper<Country>) {
+        let stringUrl = self.baseUrl + model.value.capitalName + self.apiOptions
         let convertUrl = stringUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = convertUrl.flatMap { URL(string: $0) }
         
         guard let baseUrl = url else { return }
 
-        self.networkManager.loadData(url: baseUrl) { weather, error in
-            let weatherData = weather.map { Weather(weatherJSON: $0) }
-            self.weather = weatherData
-            self.notify((weatherData,error))
+        self.requestService.loadData(url: baseUrl) { weather, error in
+            let weatherData = weather.map { self.parser.weather(from: $0) }
+            model.update {
+                $0.weather = weatherData
+            }
         }
     }
 }
+
+
