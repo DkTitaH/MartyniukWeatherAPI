@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		3F02AAA021F0A2F800413D21 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */; };
 		3F02AAA221F0C8D300413D21 /* CountriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02AAA121F0C8D300413D21 /* CountriesManager.swift */; };
-		3F1FA91421F5D3A2002E9143 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1FA91321F5D3A2002E9143 /* DataModel.swift */; };
 		3F4AFC5B22043D0F00B79601 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AFC5A22043D0F00B79601 /* Parser.swift */; };
+		3F4EF7392209ABFE00BC94DE /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF7382209ABFE00BC94DE /* DateFormatter+Extensions.swift */; };
+		3F4EF73B2209AC4A00BC94DE /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF73A2209AC4A00BC94DE /* Date+Extension.swift */; };
 		3F5D611E21E7371A003603F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D611D21E7371A003603F1 /* AppDelegate.swift */; };
 		3F5D612521E7371B003603F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D612421E7371B003603F1 /* Assets.xcassets */; };
 		3F5D612821E7371B003603F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D612621E7371B003603F1 /* LaunchScreen.storyboard */; };
@@ -76,8 +77,9 @@
 /* Begin PBXFileReference section */
 		3F02AA9F21F0A2F800413D21 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		3F02AAA121F0C8D300413D21 /* CountriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesManager.swift; sourceTree = "<group>"; };
-		3F1FA91321F5D3A2002E9143 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		3F4AFC5A22043D0F00B79601 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		3F4EF7382209ABFE00BC94DE /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		3F4EF73A2209AC4A00BC94DE /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		3F5D611A21E7371A003603F1 /* WeatherAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5D611D21E7371A003603F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F5D612421E7371B003603F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -280,6 +282,8 @@
 				3F5D61CB21E73B9E003603F1 /* DispatchTime+Extensions.swift */,
 				3F5D61CC21E73B9E003603F1 /* RangeReplaceableCollection+Extensions.swift */,
 				3F5D61CD21E73B9E003603F1 /* Strideable+Extensions.swift */,
+				3F4EF7382209ABFE00BC94DE /* DateFormatter+Extensions.swift */,
+				3F4EF73A2209AC4A00BC94DE /* Date+Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -327,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				3F90CA83220066E2009C7256 /* DataModels.swift */,
-				3F1FA91321F5D3A2002E9143 /* DataModel.swift */,
 				3F777F0E21ECA7100069135B /* CountryJSON.swift */,
 				3F777F1121ECA7200069135B /* WeatherJSON.swift */,
 				3FBBB1D321F9BAC300BA49F2 /* Country.swift */,
@@ -492,7 +495,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F1FA91421F5D3A2002E9143 /* DataModel.swift in Sources */,
 				3FBBB1D421F9BAC300BA49F2 /* Country.swift in Sources */,
 				3F5D61D021E73B9E003603F1 /* ObservableObject.Observers.swift in Sources */,
 				3F5D61E521E73F12003603F1 /* WeatherViewController.swift in Sources */,
@@ -505,6 +507,7 @@
 				3F5D61D321E73B9E003603F1 /* AbstractCancellableProperty.swift in Sources */,
 				3F777F0F21ECA7100069135B /* CountryJSON.swift in Sources */,
 				3F4AFC5B22043D0F00B79601 /* Parser.swift in Sources */,
+				3F4EF7392209ABFE00BC94DE /* DateFormatter+Extensions.swift in Sources */,
 				3F5D61DC21E73B9E003603F1 /* NSLocking+Extension.swift in Sources */,
 				3F5D61D521E73B9E003603F1 /* F.swift in Sources */,
 				3F5D61EB21E75B38003603F1 /* CountriesViewController.swift in Sources */,
@@ -528,6 +531,7 @@
 				3F02AAA221F0C8D300413D21 /* CountriesManager.swift in Sources */,
 				3F90CA84220066E2009C7256 /* DataModels.swift in Sources */,
 				3F5D61D121E73B9E003603F1 /* Generator.swift in Sources */,
+				3F4EF73B2209AC4A00BC94DE /* Date+Extension.swift in Sources */,
 				3F5D61D221E73B9E003603F1 /* ObservableObject.swift in Sources */,
 				3F5D61DE21E73B9E003603F1 /* RangeReplaceableCollection+Extensions.swift in Sources */,
 				3F777F0A21EC83E40069135B /* ColorRepresentable.swift in Sources */,

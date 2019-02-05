@@ -15,29 +15,28 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     private var cancellableObserver = CancellableProperty()
     
     private let countriesManager: CountriesManager
-    private let requestService: RequestService<[CountryJSON]>
     
-    private let model = DataModels()
+    private let countriesModel = DataModels()
     
-    init(requestService: RequestService<[CountryJSON]>) {
-        self.requestService = requestService
-        self.countriesManager = CountriesManager(requestService: requestService)
+    init(countriesManager: CountriesManager) {
+        self.countriesManager = countriesManager
         
         super.init(nibName: nil, bundle: nil)
         
-        self.cancellableObserver.value = self.model.observer { state in
+        self.cancellableObserver.value = self.countriesModel.observer { state in
+            let reloadData = self.reloadData
+            
             switch state {
-                
             case .didUpdate(_):
-                <#code#>
+                return
             case .didRemove(_):
-                self.reloadData()
+                reloadData()
             case .didAppend(_):
-                self.reloadData()
+                reloadData()
             }
         }
         
-        self.countriesManager.getCountries(model: self.model)
+        self.countriesManager.getCountries(model: self.countriesModel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,17 +45,16 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.rootView?.table?.register(CountriesViewCell.self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.model.values.count
+        return self.countriesModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withCellClass: CountriesViewCell.self) { cell in
-            cell.fillCell(model: self.model.values[indexPath.row])
+            cell.fillCell(country: self.countriesModel[indexPath.row].value)
         }
     }
     
@@ -64,8 +62,15 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         let requestService = RequestService<WeatherJSON>()
         let manager = WeatherManager(requestService: requestService)
         let weatherViewController = WeatherViewController(weatherManager: manager)
-    
-        weatherViewController.fill(with: self.model[indexPath.row])
+        let country = self.countriesModel[indexPath.row]
+        
+        country.observer { _ in
+            dispatchOnMain {
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
+        }
+        
+        weatherViewController.fill(with: country)
         
         self.navigationController?.pushViewController(weatherViewController, animated: true)
     }
@@ -76,5 +81,3 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
 }
-
-

@@ -31,3 +31,15 @@ func toString(_ cls: AnyClass) -> String {
 func dispatchOnMain(execute: @escaping F.Execute) {
     DispatchQueue.main.async(execute: execute)
 }
+
+func stringWithPercent( _ value: CustomStringConvertible) -> String {
+    return "\(value)%"
+}
+
+func stringWithCelsius( _ value: CustomStringConvertible) -> String {
+    return "\(value)" + UnitTemperature.celsius.symbol
+}
+
+func stringWithMetersPerSecond( _ value: CustomStringConvertible) -> String {
+    return "\(value)" + UnitSpeed.metersPerSecond.symbol
+}

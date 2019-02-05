@@ -32,11 +32,11 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.model.do {
-            self.weatherManager.getWeatherData(model: $0)
+        self.model.do {	
             $0.observer {
                 self.prepareView(with: $0.weather)
             }
+            self.weatherManager.getWeatherData(model: $0)
         }
     }
     

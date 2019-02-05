@@ -12,18 +12,22 @@ class DataModels: ObservableObject<DataModels.DataModelEvents> {
     
     enum DataModelEvents {
 
-        case didUpdate(DataModels)
-        case didRemove(DataModels)
-        case didAppend(DataModels)
+        case didUpdate(Country)
+        case didRemove(Country)
+        case didAppend(Country)
     }
     
-    private(set) var values = [Country]()
+    private var values = [Country]()
+    
+    public var count: Int {
+        return self.values.count
+    }
     
     subscript (index: Int) -> Wrapper<Country> {
         let wrapper = Wrapper(self.values[index])
         
-        wrapper.observer {_ in 
-            self.update()
+        wrapper.observer {
+            self.notify(.didUpdate($0))
         }
         
         return wrapper
@@ -31,23 +35,10 @@ class DataModels: ObservableObject<DataModels.DataModelEvents> {
     
     public func append(country: Country) {
         self.values.append(country)
-        self.notify(.didAppend(self))
+        self.notify(.didAppend(country))
     }
     
     public func remove(index: Int) {
         self.values.remove(at: index)
     }
-    
-    public func update() {
-        self.notify(.didUpdate(self))
-    }
-    
-//    private func prepareNotifications() {
-//        self.values.forEach {
-//            $0.weather
-//        }
-//        self.values.forEach { [weak self] model in
-//            (self?.notify).do { _ = model.observer(handler: $0) }
-//        }
-//    }
 }

@@ -17,17 +17,11 @@ class WeatherView: UIView {
     @IBOutlet var cityName: UILabel?
     
     public func fillView(weather: Weather?) {
-        let stringWithPercent = self.stringWithPercent
-        
-        self.label?.text = weather?.temperature.map { String($0) + UnitTemperature.celsius.symbol }
+        self.label?.text = weather?.temperature.map(stringWithCelsius)
         self.cloudsData?.text = weather?.clouds.map(stringWithPercent)
         self.humidityData?.text = weather?.humidity.map(stringWithPercent)
-        self.windSpeedData?.text = weather?.windSpeed.map { String($0) + UnitSpeed.metersPerSecond.symbol }
+        self.windSpeedData?.text = weather?.windSpeed.map(stringWithMetersPerSecond)
         self.cityName?.text = weather?.cityName
-    }
-    
-    private func stringWithPercent(value: CustomStringConvertible) -> String {
-        return "\(value)%"
     }
 }
 
