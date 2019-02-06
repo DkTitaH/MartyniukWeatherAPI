@@ -10,7 +10,10 @@ import Foundation
 
 extension Date {
     
-    public func string() -> String {
-        return DateFormatter.shortUA.string(from: self)
+    public func string(locale identifier: String) -> String {
+        let dateFormatter = DateFormatter.short
+        dateFormatter.locale = Locale(identifier: identifier)
+        
+        return dateFormatter.string(from: self)
     }
 }

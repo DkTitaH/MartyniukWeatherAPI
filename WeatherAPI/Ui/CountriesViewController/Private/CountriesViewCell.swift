@@ -18,10 +18,11 @@ class CountriesViewCell: TableViewCell {
     public func fillCell(country: ObservableWrapper<Country>) {
         let country = country.value
         let weather = country.weather
+        let date = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)) }
         
         self.countryName?.text = country.name
         self.capitalName?.text = country.capitalName
         self.temperature?.text = weather?.temperature.map(stringWithCelsius)
-        self.date?.text = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)).string() }
+        self.date?.text = date?.string(locale: "ua_UA")
     }
 }

@@ -1,12 +1,12 @@
 //
-//  CountriesManager.swift
+//  WeatherNetworkService.swift
 //  WeatherAPI
 //
-//  Created by Student on 17.01.2019.
+//  Created by Student on 06.02.2019.
 //  Copyright © 2019 Student. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class CountriesNetworkService {
     

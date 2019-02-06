@@ -52,7 +52,6 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withCellClass: CountriesViewCell.self) { cell in
             cell.fillCell(country: self.countriesModel[indexPath.row])
-//            cell.fillCell(country: self.countriesModel[indexPath.row].value)
         }
     }
     

@@ -1,8 +1,8 @@
 //
-//  Parser.swift
+//  Request.swift
 //  WeatherAPI
 //
-//  Created by Student on 14.01.2019.
+//  Created by Student on 06.02.2019.
 //  Copyright © 2019 Student. All rights reserved.
 //
 

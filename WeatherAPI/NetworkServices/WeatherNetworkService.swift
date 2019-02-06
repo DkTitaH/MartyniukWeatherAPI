@@ -1,12 +1,12 @@
 //
-//  WeatherData.swift
+//  CountriesNetworkService.swift
 //  WeatherAPI
 //
-//  Created by Student on 17.01.2019.
+//  Created by Student on 06.02.2019.
 //  Copyright © 2019 Student. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class WeatherNetworkService {
     
@@ -26,7 +26,7 @@ class WeatherNetworkService {
         let url = stringUrl.flatMap(URL.init)
         
         guard let baseUrl = url else { return }
-
+        
         self.requestService.loadData(url: baseUrl) { data, error in
             country.update {
                 $0.weather = self.parser.weather(data: data)

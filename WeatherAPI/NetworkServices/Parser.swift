@@ -1,8 +1,8 @@
 //
-//  Parser.swift
+//  Parse.swift
 //  WeatherAPI
 //
-//  Created by Student on 01.02.2019.
+//  Created by Student on 06.02.2019.
 //  Copyright © 2019 Student. All rights reserved.
 //
 
@@ -30,10 +30,10 @@ class Parser {
         let main = json.main
         
         return Weather(
-            temperatue: main?.temp.map { Int($0) },
-            humidity: main?.humidity,
-            clouds: json.clouds?.all,
-            windSpeed: json.wind?.speed.map { Int($0) },
+            temperatue: main.temp.int,
+            humidity: main.humidity,
+            clouds: json.clouds.all,
+            windSpeed: json.wind.speed.int,
             cityName: json.name,
             date: json.dt
         )

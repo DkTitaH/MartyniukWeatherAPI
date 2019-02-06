@@ -10,9 +10,8 @@ import Foundation
 
 extension DateFormatter {
     
-    static var shortUA: DateFormatter {
+    static var short: DateFormatter {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ua_UA")
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         
