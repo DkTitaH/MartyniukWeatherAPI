@@ -8,11 +8,9 @@
 
 import Foundation
 
-class DataModels: ObservableObject<DataModels.DataModelEvents> {
+class Countries: ObservableObject<Countries.DataModelEvents> {
     
     enum DataModelEvents {
-
-        case didUpdate(Country)
         case didRemove(Country)
         case didAppend(Country)
     }
@@ -23,14 +21,8 @@ class DataModels: ObservableObject<DataModels.DataModelEvents> {
         return self.values.count
     }
     
-    subscript (index: Int) -> Wrapper<Country> {
-        let wrapper = Wrapper(self.values[index])
-        
-        wrapper.observer {
-            self.notify(.didUpdate($0))
-        }
-        
-        return wrapper
+    subscript (index: Int) -> ObservableWrapper<Country> {
+        return ObservableWrapper(self.values[index])
     }
     
     public func append(country: Country) {

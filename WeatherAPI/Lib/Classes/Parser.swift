@@ -10,20 +10,42 @@ import Foundation
 
 class Parser {
     
-    public func weather(from weatherJSON: WeatherJSON) -> Weather {
-        let main = weatherJSON.main
+    public func country(data: Data?) -> Country? {
+        return self.model(data: data, parser: self.country)
+    }
+    
+    public func weather(data: Data?) -> Weather? {
+        return self.model(data: data, parser: self.weather)
+    }
+    
+    public func countries(data: Data?) -> [Country]? {
+        return self.model(data: data, parser: self.countries)
+    }
+    
+    private func country(json: CountryJSON) -> Country {
+        return Country(name: json.name, capitalName: json.capital)
+    }
+    
+    private func weather(json: WeatherJSON) -> Weather {
+        let main = json.main
         
         return Weather(
             temperatue: main?.temp.map { Int($0) },
             humidity: main?.humidity,
-            clouds: weatherJSON.clouds?.all,
-            windSpeed: weatherJSON.wind?.speed.map { Int($0) },
-            cityName: weatherJSON.name,
-            date: weatherJSON.dt
+            clouds: json.clouds?.all,
+            windSpeed: json.wind?.speed.map { Int($0) },
+            cityName: json.name,
+            date: json.dt
         )
     }
     
-    public func country(from countryJSON: CountryJSON) -> Country {
-        return Country(name: countryJSON.name, capitalName: countryJSON.capital)
+    private func countries(jsons: [CountryJSON]) -> [Country] {
+        return jsons.map(self.country)
+    }
+    
+    private func model<JSON: Decodable, Model>(data: Data?, parser: (JSON) -> Model) -> Model? {
+        return data
+            .flatMap { try? JSONDecoder().decode(JSON.self, from: $0) }
+            .map(parser)
     }
 }

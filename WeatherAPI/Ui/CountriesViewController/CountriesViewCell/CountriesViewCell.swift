@@ -15,7 +15,8 @@ class CountriesViewCell: TableViewCell {
     @IBOutlet var date: UILabel?
     @IBOutlet var temperature: UILabel?
     
-    public func fillCell(country: Country) {
+    public func fillCell(country: ObservableWrapper<Country>) {
+        let country = country.value
         let weather = country.weather
         
         self.countryName?.text = country.name

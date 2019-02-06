@@ -8,12 +8,14 @@
 
 import Foundation
 
-class RequestService<ModelType: Decodable> {
+class RequestService {
     
-    public func loadData(url: URL, completion: @escaping F.Completion<(ModelType?, Error?)>) {
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            let result = data.flatMap { try? JSONDecoder().decode(ModelType.self, from: $0) }
-            completion((result,error))
-        }.resume()
+    public func loadData(url: URL, completion: @escaping F.Completion<(Data?, Error?)>) {
+        URLSession
+            .shared
+            .dataTask(with: url) { (data, response, error) in
+                completion((data,error))
+            }
+            .resume()
     }
 }

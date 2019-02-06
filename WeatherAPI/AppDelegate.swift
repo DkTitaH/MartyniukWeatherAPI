@@ -19,11 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
         -> Bool
     {
-        let requestService = RequestService<[CountryJSON]>()
-        let countriesManager = CountriesManager(requestService: requestService)
+        let requestService = RequestService()
+        let countries = Countries()
+        let countriesNetworkService = CountriesNetworkService(requestService: requestService)
         
         let navigationController = UINavigationController(
-            rootViewController: CountriesViewController(countriesManager: countriesManager)
+            rootViewController: CountriesViewController(
+                countries: countries,
+                countriesNetworkService: countriesNetworkService
+            )
         )
         
         self.window = {
