@@ -12,28 +12,21 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     typealias RootView = CountriesView
 
-    private let cancellableObserver = CancellableProperty()
+    private let countriesObserver = CancellableProperty()
+    private let countryObserver = CancellableProperty()
     
     private let countriesNetworkService: CountriesNetworkService
-    private let countriesModel = Countries()
+    private var countries: Countries {
+        didSet { self.getCountries() }
+    }
     
-    init(countries model: Countries, countriesNetworkService: CountriesNetworkService) {
+    init(countries: Countries, countriesNetworkService: CountriesNetworkService) {
         self.countriesNetworkService = countriesNetworkService
+        self.countries = countries
         
         super.init(nibName: nil, bundle: nil)
         
-        self.cancellableObserver.value = self.countriesModel.observer { state in
-            let reloadData = self.reloadData
-            
-            switch state {
-            case .didRemove(_):
-                reloadData()
-            case .didAppend(_):
-                reloadData()
-            }
-        }
-        
-        self.countriesNetworkService.getCountries(model: self.countriesModel)
+        self.getCountries()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,32 +39,45 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.countriesModel.count
+        return self.countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withCellClass: CountriesViewCell.self) { cell in
-            cell.fillCell(country: self.countriesModel[indexPath.row])
+            cell.fillCell(country: self.countries[indexPath.row])
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let requestService = RequestService()
         let weatherNetworkService = WeatherNetworkService(requestService: requestService)
-        let country = self.countriesModel[indexPath.row]
+//        let country = self.countries[indexPath.row]
+        
+//        self.countryObserver.value = country.observer { _ in
+//            dispatchOnMain {
+//                tableView.reloadRows(at: [indexPath], with: .none)
+//            }
+//        }
         
         let weatherViewController = WeatherViewController(
-            country: country,
+            country: self.countries[indexPath.row],
             weatherNetworkService: weatherNetworkService
         )
         
-        country.observer { _ in
-            dispatchOnMain {
-                tableView.reloadRows(at: [indexPath], with: .none)
+        self.navigationController?.pushViewController(weatherViewController, animated: true)
+    }
+    
+    private func getCountries() {
+        self.countriesObserver.value = self.countries.observer { [weak self] state in
+            switch state {
+            case .didRemove(_):
+                self?.reloadData()
+            case .didAppend(_):
+                return
             }
         }
         
-        self.navigationController?.pushViewController(weatherViewController, animated: true)
+        self.countriesNetworkService.getCountries(model: self.countries)
     }
     
     private func reloadData() {

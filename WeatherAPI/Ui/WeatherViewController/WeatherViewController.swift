@@ -12,24 +12,36 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     
     typealias RootView = WeatherView
     
-    private let country: ObservableWrapper<Country>
+    private var country: Country {
+        didSet { self.getWeather() }
+    }
     private let weatherManager: WeatherNetworkService
+    private let countryObserver = CancellableProperty()
     
-    init(country: ObservableWrapper<Country>, weatherNetworkService: WeatherNetworkService) {
+    init(country: Country, weatherNetworkService: WeatherNetworkService) {
         self.weatherManager = weatherNetworkService
         self.country = country
         
         super.init(nibName: nil, bundle: nil)
         
-        country.observer {
-            self.prepareView(with: $0.weather)
-        }
-        
-        self.weatherManager.getWeatherData(country: country)
+        self.getWeather()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func getWeather() {
+        let country = self.country
+        
+        self.countryObserver.value = country.observer { [weak self] state in
+            switch state {
+            case .didChangeWeather(let weather):
+                self?.prepareView(with: weather)
+            }	
+        }
+        
+        self.weatherManager.getWeather(country: country)
     }
     
     private func prepareView(with weather: Weather?) {

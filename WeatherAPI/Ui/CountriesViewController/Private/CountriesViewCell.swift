@@ -15,14 +15,21 @@ class CountriesViewCell: TableViewCell {
     @IBOutlet var date: UILabel?
     @IBOutlet var temperature: UILabel?
     
-    public func fillCell(country: ObservableWrapper<Country>) {
-        let country = country.value
-        let weather = country.weather
-        let date = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)) }
-        
+    private let countryObserver = CancellableProperty()
+    
+    public func fillCell(country: Country) {
         self.countryName?.text = country.name
         self.capitalName?.text = country.capitalName
-        self.temperature?.text = weather?.temperature.map(stringWithCelsius)
-        self.date?.text = date?.string(locale: "ua_UA")
+        
+        self.countryObserver.value = country.observer { event in
+            switch event {
+            case .didChangeWeather(let weather):
+                let date = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)) }
+                dispatchOnMain {
+                    self.temperature?.text = weather?.temperature.map(stringWithCelsius)
+                    self.date?.text = date?.string(locale: "ua_UA")
+                }
+            }
+        }
     }
 }

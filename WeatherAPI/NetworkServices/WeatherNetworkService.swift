@@ -20,17 +20,15 @@ class WeatherNetworkService {
         self.requestService = requestService
     }
     
-    public func getWeatherData(country: ObservableWrapper<Country>) {
-        let city = country.value.capitalName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    public func getWeather(country: Country) {
+        let city = country.capitalName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let stringUrl = city.map { self.baseUrl + $0 + self.apiOptions }
         let url = stringUrl.flatMap(URL.init)
         
         guard let baseUrl = url else { return }
         
         self.requestService.loadData(url: baseUrl) { data, error in
-            country.update {
-                $0.weather = self.parser.weather(data: data)
-            }
+            country.weather = self.parser.weather(data: data)
         }
     }
 }

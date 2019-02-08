@@ -21,8 +21,8 @@ class Countries: ObservableObject<Countries.DataModelEvents> {
         return self.values.count
     }
     
-    subscript (index: Int) -> ObservableWrapper<Country> {
-        return ObservableWrapper(self.values[index])
+    subscript (index: Int) -> Country {
+        return self.values[index]
     }
     
     public func append(country: Country) {
