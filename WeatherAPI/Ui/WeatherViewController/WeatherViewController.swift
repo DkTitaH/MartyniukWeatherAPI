@@ -12,9 +12,7 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     
     typealias RootView = WeatherView
     
-    private var country: Country {
-        didSet { self.getWeather() }
-    }
+    private let country: Country
     private let weatherManager: WeatherNetworkService
     private let countryObserver = CancellableProperty()
     
@@ -25,6 +23,12 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
         super.init(nibName: nil, bundle: nil)
         
         self.getWeather()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.prepareView(with: self.country.weather)
     }
     
     required init?(coder aDecoder: NSCoder) {

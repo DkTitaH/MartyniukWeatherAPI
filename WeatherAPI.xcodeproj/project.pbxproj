@@ -14,6 +14,7 @@
 		3F2E2FC7220B20BC00AD7C65 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E2FC6220B20BC00AD7C65 /* Parser.swift */; };
 		3F2E2FC9220B20DC00AD7C65 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E2FC8220B20DC00AD7C65 /* RequestService.swift */; };
 		3F2E2FCB220B22CF00AD7C65 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E2FCA220B22CF00AD7C65 /* Double+Extensions.swift */; };
+		3F303C972211C0E300FCB031 /* NetworkStateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F303C962211C0E300FCB031 /* NetworkStateable.swift */; };
 		3F4EF7392209ABFE00BC94DE /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF7382209ABFE00BC94DE /* DateFormatter+Extensions.swift */; };
 		3F4EF73B2209AC4A00BC94DE /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF73A2209AC4A00BC94DE /* Date+Extension.swift */; };
 		3F5D611E21E7371A003603F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D611D21E7371A003603F1 /* AppDelegate.swift */; };
@@ -83,6 +84,7 @@
 		3F2E2FC6220B20BC00AD7C65 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		3F2E2FC8220B20DC00AD7C65 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		3F2E2FCA220B22CF00AD7C65 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		3F303C962211C0E300FCB031 /* NetworkStateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStateable.swift; sourceTree = "<group>"; };
 		3F4EF7382209ABFE00BC94DE /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		3F4EF73A2209AC4A00BC94DE /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		3F5D611A21E7371A003603F1 /* WeatherAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5D61CF21E73B9E003603F1 /* Cancellable.swift */,
+				3F303C962211C0E300FCB031 /* NetworkStateable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				3F5D61D621E73B9E003603F1 /* Queue.swift in Sources */,
 				3F5D61DB21E73B9E003603F1 /* Optional+Extension.swift in Sources */,
 				3F2E2FC4220B200100AD7C65 /* CountryJson.swift in Sources */,
+				3F303C972211C0E300FCB031 /* NetworkStateable.swift in Sources */,
 				3F2E2FC7220B20BC00AD7C65 /* Parser.swift in Sources */,
 				3F5D61EE21E75B57003603F1 /* CountriesView.swift in Sources */,
 				3F5D61E021E73B9E003603F1 /* Cancellable.swift in Sources */,
@@ -721,8 +725,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BDGN29TYRX;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WeatherAPI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -730,6 +735,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IDAP.WeatherAPI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -739,8 +745,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BDGN29TYRX;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WeatherAPI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -748,6 +755,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IDAP.WeatherAPI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

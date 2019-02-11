@@ -12,7 +12,8 @@ class Countries: ObservableObject<Countries.DataModelEvents> {
     
     enum DataModelEvents {
         case didRemove(Country)
-        case didAppend(Country)
+        case didRewritedCountries([Country])
+        case didAppendCountry(Country)
     }
     
     private var values = [Country]()
@@ -21,13 +22,18 @@ class Countries: ObservableObject<Countries.DataModelEvents> {
         return self.values.count
     }
     
-    subscript (index: Int) -> Country {
+    subscript(index: Int) -> Country {
         return self.values[index]
     }
     
     public func append(country: Country) {
         self.values.append(country)
-        self.notify(.didAppend(country))
+        self.notify(.didAppendCountry(country))
+    }
+    
+    public func rewrite(with countries: [Country]) {
+        self.values = countries
+        self.notify(.didRewritedCountries(self.values))
     }
     
     public func remove(index: Int) {

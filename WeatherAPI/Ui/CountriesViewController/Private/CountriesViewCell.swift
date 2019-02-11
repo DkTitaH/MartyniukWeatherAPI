@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum CountriesViewCellEvents {
+    
+    case needUpdateCell
+}
+
 class CountriesViewCell: TableViewCell {
    
     @IBOutlet var countryName: UILabel?
@@ -15,21 +20,46 @@ class CountriesViewCell: TableViewCell {
     @IBOutlet var date: UILabel?
     @IBOutlet var temperature: UILabel?
     
-    private let countryObserver = CancellableProperty()
+    public var country: Country? {
+        didSet {
+            self.fill()
+            
+            self.prepareObserver()
+        }
+    }
     
-    public func fillCell(country: Country) {
-        self.countryName?.text = country.name
-        self.capitalName?.text = country.capitalName
+    public var events: F.Completion<CountriesViewCellEvents>?
+    
+    private let countryContainer = CancellableProperty()
+    
+    private func fill() {
+        let country = self.country
+        let weather = country?.weather
         
-        self.countryObserver.value = country.observer { event in
-            switch event {
-            case .didChangeWeather(let weather):
-                let date = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)) }
+        let date = weather?.date.map { Date(timeIntervalSince1970: TimeInterval($0)) }
+        
+        self.countryName?.text = country?.name
+        self.capitalName?.text = country?.capitalName
+        self.temperature?.text = weather?.temperature.map(stringWithCelsius)
+        self.date?.text = date?.string(locale: .ua)
+    }
+    
+    private func prepareObserver() {
+        self.countryContainer.value = self.country?.observer { events in
+            switch events {
+            case .didChangeWeather(_):
                 dispatchOnMain {
-                    self.temperature?.text = weather?.temperature.map(stringWithCelsius)
-                    self.date?.text = date?.string(locale: "ua_UA")
+                    self.fill()
+                    
+                    self.events?(.needUpdateCell)
                 }
             }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.countryContainer.value?.cancel()
     }
 }

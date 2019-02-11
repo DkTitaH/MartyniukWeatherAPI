@@ -8,7 +8,9 @@
 
 import Foundation
 
-class CountriesNetworkService {
+class CountriesNetworkService: NetworkStateable {
+    
+    var status = NetworkState.idle
     
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
@@ -25,9 +27,8 @@ class CountriesNetworkService {
         guard let url = baseUrl else { return }
         
         self.requestService.loadData(url: url) { data, error in
-            self.parser
-                .countries(data: data)?
-                .forEach(model.append)
+            let countries = self.parser.countries(data: data)
+            countries.map(model.rewrite)
         }
     }
 }

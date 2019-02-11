@@ -12,13 +12,14 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     typealias RootView = CountriesView
 
-    private let countriesObserver = CancellableProperty()
-    private let countryObserver = CancellableProperty()
-    
-    private let countriesNetworkService: CountriesNetworkService
     private var countries: Countries {
         didSet { self.getCountries() }
     }
+    
+    private let countriesObserver = CancellableProperty()
+    
+    private let countriesNetworkService: CountriesNetworkService
+
     
     init(countries: Countries, countriesNetworkService: CountriesNetworkService) {
         self.countriesNetworkService = countriesNetworkService
@@ -36,6 +37,7 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.rootView?.table?.register(CountriesViewCell.self)
+        self.navigationItem.backBarButtonItem?.action = #selector(self.onNavigationBar)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,20 +46,21 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withCellClass: CountriesViewCell.self) { cell in
-            cell.fillCell(country: self.countries[indexPath.row])
+            let country = self.countries[indexPath.row]
+            
+            cell.country = country
+            
+            cell.events = { _ in
+                dispatchOnMain {
+                    tableView.reloadRows(at: [indexPath], with: .none)
+                }
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let requestService = RequestService()
         let weatherNetworkService = WeatherNetworkService(requestService: requestService)
-//        let country = self.countries[indexPath.row]
-        
-//        self.countryObserver.value = country.observer { _ in
-//            dispatchOnMain {
-//                tableView.reloadRows(at: [indexPath], with: .none)
-//            }
-//        }
         
         let weatherViewController = WeatherViewController(
             country: self.countries[indexPath.row],
@@ -69,11 +72,14 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func getCountries() {
         self.countriesObserver.value = self.countries.observer { [weak self] state in
+            let reloadData = self?.reloadData
             switch state {
-            case .didRemove(_):
-                self?.reloadData()
-            case .didAppend(_):
-                return
+            case .didRemove:
+                reloadData?()
+            case .didRewritedCountries:
+                reloadData?()
+            case .didAppendCountry:
+                reloadData?()
             }
         }
         
@@ -85,4 +91,18 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
             self.rootView?.table?.reloadData()
         }
     }
+    
+    @objc private func onNavigationBar() {
+        
+    }
 }
+
+
+
+//        let country = self.countries[indexPath.row]
+
+//        self.countryObserver.value = country.observer { _ in
+//            dispatchOnMain {
+//                tableView.reloadRows(at: [indexPath], with: .none)
+//            }
+//        }

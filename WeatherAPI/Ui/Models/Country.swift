@@ -16,6 +16,7 @@ class Country: ObservableObject<Country.Event> {
     
     public let name: String
     public let capitalName: String
+    
     public var weather: Weather? {
         didSet {
             self.notify(.didChangeWeather(self.weather))

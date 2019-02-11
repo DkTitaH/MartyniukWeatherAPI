@@ -8,11 +8,16 @@
 
 import Foundation
 
+public enum LocaleIndentificators: String {
+    
+    case ua = "ua_UA"
+}
+
 extension Date {
     
-    public func string(locale identifier: String) -> String {
+    public func string(locale identifier: LocaleIndentificators) -> String {
         let dateFormatter = DateFormatter.short
-        dateFormatter.locale = Locale(identifier: identifier)
+        dateFormatter.locale = Locale(identifier: identifier.rawValue)
         
         return dateFormatter.string(from: self)
     }

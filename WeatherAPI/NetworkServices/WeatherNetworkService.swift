@@ -8,15 +8,18 @@
 
 import Foundation
 
-class WeatherNetworkService {
+class WeatherNetworkService: NetworkStateable {
+    
+    var status = NetworkState.idle
+    
+    public let requestService: RequestServiceType
     
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q="
     private let apiOptions = "&units=metric&appid=b581214660a55dc1348f6e109cac1104"
     
-    private let requestService: RequestService
     private let parser = Parser()
     
-    init(requestService: RequestService) {
+    init(requestService: RequestServiceType) {
         self.requestService = requestService
     }
     
