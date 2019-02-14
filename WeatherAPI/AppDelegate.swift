@@ -19,14 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
         -> Bool
     {
-        let requestService = RequestService()
+        
         let countries = Countries()
-        let countriesNetworkService = CountriesNetworkService(requestService: requestService)
+        let service = CountriesNetworkService.init § DataNetworkRequestService()
         
         let navigationController = UINavigationController(
             rootViewController: CountriesViewController(
                 countries: countries,
-                countriesNetworkService: countriesNetworkService
+                countriesNetworkService: service
             )
         )
         

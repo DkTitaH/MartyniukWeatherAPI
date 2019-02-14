@@ -12,7 +12,7 @@ enum F {
     
     typealias VoidCompletion = () -> ()
     typealias Execute = () -> ()
-    
+    	
     typealias Completion<Value> = (Value) -> ()
 }
 
@@ -28,7 +28,37 @@ func toString(_ cls: AnyClass) -> String {
     return String(describing: cls)
 }
 
-func dispatchOnMain(execute: @escaping F.Execute) {
+func identity<Value>(_ value: Value) -> Value {
+    return value
+}
+
+func ignoreInput<Value, Result>(_ action: @escaping () -> Result) -> (Value) -> Result {
+    return { _ in
+        action()
+    }
+}
+
+func returnValue<Value>(_ value: Value) -> () -> Value {
+    return { value }
+}
+
+func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+    return { a in
+        { f(a, $0) }
+    }
+}
+
+func uncurry<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (A, B) -> C {
+    return { f($0)($1) }
+}
+
+func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
+    return { b in
+        { f($0)(b) }
+    }
+}
+
+func performOnMain(execute: @escaping F.Execute) {
     DispatchQueue.main.async(execute: execute)
 }
 

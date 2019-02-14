@@ -10,15 +10,21 @@ import Foundation
 
 class Parser {
     
-    public func country(data: Data?) -> Country? {
+    typealias ParserResultType<Model> = Result<Model, ParserError>
+    
+    enum ParserError: Error {
+        case parseFailed
+    }
+    
+    public func country(data: Data) -> ParserResultType<Country> {
         return self.model(data: data, parser: self.country)
     }
     
-    public func weather(data: Data?) -> Weather? {
+    public func weather(data: Data) -> ParserResultType<Weather> {
         return self.model(data: data, parser: self.weather)
     }
     
-    public func countries(data: Data?) -> [Country]? {
+    public func countries(data: Data) -> ParserResultType<[Country]> {
         return self.model(data: data, parser: self.countries)
     }
     
@@ -43,9 +49,15 @@ class Parser {
         return jsons.map(self.country)
     }
     
-    private func model<JSON: Decodable, Model>(data: Data?, parser: (JSON) -> Model) -> Model? {
-        return data
-            .flatMap { try? JSONDecoder().decode(JSON.self, from: $0) }
+    private func model<json: Decodable, Model>(data: Data?, parser: @escaping (json) -> Model) -> Result<Model, ParserError> {
+        let model = data
+            .flatMap { try? JSONDecoder().decode(json.self, from: $0) }
             .map(parser)
+        
+        return Result(
+            value: model,
+            error: .parseFailed,
+            default: .parseFailed
+        )
     }
 }

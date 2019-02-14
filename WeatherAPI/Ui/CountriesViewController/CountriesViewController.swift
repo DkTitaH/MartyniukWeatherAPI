@@ -13,13 +13,16 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     typealias RootView = CountriesView
 
     private var countries: Countries {
-        didSet { self.getCountries() }
+        didSet {
+            self.getCountries()
+        }
     }
     
     private let countriesObserver = CancellableProperty()
     
     private let countriesNetworkService: CountriesNetworkService
-
+    
+    private var task = CancellableProperty()
     
     init(countries: Countries, countriesNetworkService: CountriesNetworkService) {
         self.countriesNetworkService = countriesNetworkService
@@ -36,8 +39,8 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.rootView?.table?.register(CountriesViewCell.self)
-        self.navigationItem.backBarButtonItem?.action = #selector(self.onNavigationBar)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,18 +52,21 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
             let country = self.countries[indexPath.row]
             
             cell.country = country
-            
-            cell.events = { _ in
-                dispatchOnMain {
-                    tableView.reloadRows(at: [indexPath], with: .none)
+            cell.events = {
+                cell.countryContainer.value?.cancel()
+                switch $0 {
+                case .needUpdateCell:
+                    performOnMain {
+                        tableView.reloadRows(at: [indexPath], with: .none)
+                    }
                 }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let requestService = RequestService()
-        let weatherNetworkService = WeatherNetworkService(requestService: requestService)
+        let dataNetworkRequestService = DataNetworkRequestService()
+        let weatherNetworkService = WeatherNetworkService(requestService: dataNetworkRequestService)
         
         let weatherViewController = WeatherViewController(
             country: self.countries[indexPath.row],
@@ -83,26 +89,12 @@ class CountriesViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
-        self.countriesNetworkService.getCountries(model: self.countries)
+        self.task.value = self.countriesNetworkService.scheduledTask(model: self.countries)
     }
     
     private func reloadData() {
-        dispatchOnMain {
+        performOnMain {
             self.rootView?.table?.reloadData()
         }
     }
-    
-    @objc private func onNavigationBar() {
-        
-    }
 }
-
-
-
-//        let country = self.countries[indexPath.row]
-
-//        self.countryObserver.value = country.observer { _ in
-//            dispatchOnMain {
-//                tableView.reloadRows(at: [indexPath], with: .none)
-//            }
-//        }

@@ -27,7 +27,9 @@ class AbstractCancellableProperty<Storage> {
 class CancellableProperty: AbstractCancellableProperty<Cancellable?> {
     
     init() {
-        super.init(initial: nil) { $0?.cancel() }
+        super.init(initial: nil) {
+            $0?.cancel()
+        }
     }
 }
 

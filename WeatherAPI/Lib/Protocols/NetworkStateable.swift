@@ -15,7 +15,7 @@ enum NetworkState {
     case idle
 }
 
-protocol NetworkStateable {
+protocol NetworkStateable: Cancellable {
     
     var status: NetworkState { get }
 }

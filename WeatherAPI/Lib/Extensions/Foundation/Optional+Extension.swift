@@ -19,4 +19,10 @@ extension Optional {
             transform?($0)
         }
     }
+
+    func flatten<Result>() -> Result?
+        where Wrapped == Result?
+    {
+        return self.flatMap { $0 }
+    }
 }

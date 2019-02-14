@@ -18,13 +18,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-Dd-Q9k">
-                        <rect key="frame" x="0.0" y="0.0" width="62" height="42.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="42.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="2Ww-cw-X6A"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Capital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-lO-NFc">
-                        <rect key="frame" x="267" y="0.0" width="53" height="21"/>
+                        <rect key="frame" x="170" y="0.0" width="150" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="dQH-hk-Hrk"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

@@ -8,27 +8,29 @@
 
 import Foundation
 
-class CountriesNetworkService: NetworkStateable {
+class CountriesNetworkService {
     
-    var status = NetworkState.idle
+    typealias ReturnedData = Countries
     
     private let baseUrl = "https://restcountries.eu/rest/v2/all"
     
-    private let requestService: RequestService
+    private let requestService: DataNetworkRequestServiceType
     private let parser = Parser()
     
-    init(requestService: RequestService) {
+    init(requestService: DataNetworkRequestServiceType) {
         self.requestService = requestService
     }
     
-    public func getCountries(model: Countries) {
+    func scheduledTask(model: Countries) -> NetworkTask {
         let baseUrl = URL(string: self.baseUrl)
         
-        guard let url = baseUrl else { return }
+        guard let url = baseUrl else { return .canceled() }
         
-        self.requestService.loadData(url: url) { data, error in
-            let countries = self.parser.countries(data: data)
-            countries.map(model.rewrite)
+        return self.requestService.scheduledTask(url: url) { result in
+            let result = result.mapValue(self.parser.countries).value
+            result?.value.do {
+                model.rewrite(with: $0)
+            }
         }
     }
 }

@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum CountriesViewCellEvents {
-    
-    case needUpdateCell
-}
-
 class CountriesViewCell: TableViewCell {
+    
+    enum CountriesViewCellEvents {
+        
+        case needUpdateCell
+    }
    
     @IBOutlet var countryName: UILabel?
     @IBOutlet var capitalName: UILabel?
@@ -30,7 +30,7 @@ class CountriesViewCell: TableViewCell {
     
     public var events: F.Completion<CountriesViewCellEvents>?
     
-    private let countryContainer = CancellableProperty()
+    let countryContainer = CancellableProperty()
     
     private func fill() {
         let country = self.country
@@ -47,19 +47,17 @@ class CountriesViewCell: TableViewCell {
     private func prepareObserver() {
         self.countryContainer.value = self.country?.observer { events in
             switch events {
-            case .didChangeWeather(_):
-                dispatchOnMain {
+            case .didChangeWeather:
+                performOnMain {
                     self.fill()
-                    
-                    self.events?(.needUpdateCell)
                 }
+                self.events?(.needUpdateCell)
             }
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         self.countryContainer.value?.cancel()
     }
 }

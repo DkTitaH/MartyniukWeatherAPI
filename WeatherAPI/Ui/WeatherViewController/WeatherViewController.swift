@@ -15,6 +15,7 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
     private let country: Country
     private let weatherManager: WeatherNetworkService
     private let countryObserver = CancellableProperty()
+    private var task: NetworkTask?
     
     init(country: Country, weatherNetworkService: WeatherNetworkService) {
         self.weatherManager = weatherNetworkService
@@ -45,11 +46,11 @@ class WeatherViewController: UIViewController, RootViewRepresentable {
             }	
         }
         
-        self.weatherManager.getWeather(country: country)
+        self.task = self.weatherManager.scheduledTask(country: country)
     }
     
     private func prepareView(with weather: Weather?) {
-        dispatchOnMain {
+        performOnMain {
             self.rootView?.fillView(weather: weather)
         }
     }
